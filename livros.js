@@ -1,4 +1,3 @@
-// Banco de dados imutável e tipado corretamente
 const LIVROS = [
     {
         id: 1,
@@ -94,19 +93,16 @@ const LIVROS = [
         avaliacao: 4.7,
         preco: 69.90,
         capa: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=500&auto=format&fit=crop&q=60",
-        sinopse: "Ambientado num futuro distante no planeta desértico Arrakis, a obra acompanha o jovem Paul Atreides e a disputa pela Especiaria."
+        sinopse: "Ambientado num futuro distante num planeta desértico Arrakis, a obra acompanha o jovem Paul Atreides e a disputa pela Especiaria."
     }
 ];
 
-// Estado global do carrinho
 let carrinho = [];
 
-// Função auxiliar centralizada para formatar valores monetários
 function formatarMoeda(valor) {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
-// Renderizar livros no Grid Principal com proteção contra reflows excessivos
 function renderizarLivros(listaDeLivros) {
     const grid = document.getElementById('livros-grid');
     if (!grid) return;
@@ -114,36 +110,35 @@ function renderizarLivros(listaDeLivros) {
     grid.innerHTML = '';
 
     if (listaDeLivros.length === 0) {
-        grid.innerHTML = `<p class="col-span-full text-center text-gray-500 py-12 text-lg">Nenhum livro encontrado.</p>`;
+        grid.innerHTML = `<p class="col-span-full text-center text-black py-12 text-lg font-medium">Nenhum livro encontrado.</p>`;
         return;
     }
 
-    // Criação de fragmento de documento para otimizar performance de renderização
     const fragmento = document.createDocumentFragment();
 
     listaDeLivros.forEach(livro => {
         const card = document.createElement('div');
-        card.className = "bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-xl transition duration-300 flex flex-col border border-gray-100";
+        card.className = "bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition duration-300 flex flex-col border border-gray-200";
         
         card.innerHTML = `
             <div class="relative cursor-pointer overflow-hidden group" onclick="abrirModal(${livro.id})">
                 <img src="${livro.capa}" alt="Capa do livro ${livro.titulo}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300" loading="lazy">
-                <span class="absolute top-2 right-2 bg-black/75 text-amber-400 text-xs font-bold px-2 py-1 rounded-md">
-                    <i class="fas fa-star" aria-hidden="true"></i> ${livro.avaliacao}
+                <span class="absolute top-2 right-2 bg-black text-white text-xs font-bold px-2 py-1 rounded-md">
+                    <i class="fas fa-star text-white" aria-hidden="true"></i> ${livro.avaliacao}
                 </span>
             </div>
             <div class="p-5 flex flex-col flex-grow justify-between">
                 <div>
-                    <span class="text-xs font-bold uppercase tracking-wide text-indigo-600">${livro.genero}</span>
-                    <h3 onclick="abrirModal(${livro.id})" class="font-bold text-base text-gray-900 mt-0.5 leading-tight hover:text-indigo-600 cursor-pointer line-clamp-2">${livro.titulo}</h3>
-                    <p class="text-xs text-gray-500 mt-1">Por: ${livro.autor}</p>
-                    <p class="text-xl font-black text-gray-900 mt-3">${formatarMoeda(livro.preco)}</p>
+                    <span class="text-xs font-bold uppercase tracking-wide text-black underline">${livro.genero}</span>
+                    <h3 onclick="abrirModal(${livro.id})" class="font-bold text-base text-black mt-0.5 leading-tight hover:underline cursor-pointer line-clamp-2">${livro.titulo}</h3>
+                    <p class="text-xs text-black mt-1 font-medium">Por: ${livro.autor}</p>
+                    <p class="text-xl font-black text-black mt-3">${formatarMoeda(livro.preco)}</p>
                 </div>
-                <div class="mt-4 pt-3 border-t border-gray-100 flex gap-2">
-                    <button onclick="abrirModal(${livro.id})" class="flex-1 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 rounded-lg transition cursor-pointer">
+                <div class="mt-4 pt-3 border-t border-gray-200 flex gap-2">
+                    <button onclick="abrirModal(${livro.id})" class="flex-1 text-xs bg-gray-100 hover:bg-gray-200 text-black font-bold py-2 rounded-lg transition cursor-pointer border border-gray-300">
                         Detalhes
                     </button>
-                    <button onclick="adicionarAoCarrinho(${livro.id})" class="flex-1 text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg transition shadow-sm flex items-center justify-center gap-1 cursor-pointer">
+                    <button onclick="adicionarAoCarrinho(${livro.id})" class="flex-1 text-xs bg-black hover:bg-gray-800 text-white font-bold py-2 rounded-lg transition shadow-sm flex items-center justify-center gap-1 cursor-pointer">
                         <i class="fas fa-cart-plus" aria-hidden="true"></i> Comprar
                     </button>
                 </div>
@@ -155,17 +150,13 @@ function renderizarLivros(listaDeLivros) {
     grid.appendChild(fragmento);
 }
 
-// Funções de Controle do Carrinho Lateral
 function abrirCarrinho() {
     const fundo = document.getElementById('carrinho-fundo');
     const lateral = document.getElementById('carrinho-lateral');
-    
     if (!fundo || !lateral) return;
 
     fundo.classList.remove('hidden');
     lateral.classList.remove('hidden');
-    
-    // Pequeno atraso para garantir o gatilho da transição CSS do Tailwind
     setTimeout(() => {
         fundo.style.opacity = "1";
         lateral.classList.remove('translate-x-full');
@@ -175,12 +166,10 @@ function abrirCarrinho() {
 function fecharCarrinho() {
     const fundo = document.getElementById('carrinho-fundo');
     const lateral = document.getElementById('carrinho-lateral');
-
     if (!fundo || !lateral) return;
 
     fundo.style.opacity = "0";
     lateral.classList.add('translate-x-full');
-    
     setTimeout(() => {
         fundo.classList.add('hidden');
         lateral.classList.add('hidden');
@@ -192,11 +181,10 @@ function adicionarAoCarrinho(id) {
     if (!livro) return;
 
     const itemNoCarrinho = carrinho.find(item => item.id === id);
-
     if (itemNoCarrinho) {
         itemNoCarrinho.quantidade += 1;
     } else {
-        carrinho.push({ ...livro, quantidade: 1 });
+        carrinho.push({ ...livro, House: 1, quantidade: 1 });
     }
 
     atualizarCarrinho();
@@ -220,7 +208,6 @@ function alterarQuantidade(id, delta) {
     }
 }
 
-// Atualização e cálculos lógicos do carrinho
 function atualizarCarrinho() {
     const container = document.getElementById('carrinho-itens');
     const contador = document.getElementById('cart-count');
@@ -235,14 +222,13 @@ function atualizarCarrinho() {
     if (!container || !contador || !subtotalElemento || !freteElemento || !totalElemento) return;
 
     container.innerHTML = '';
-    
     let totalItens = 0;
     let subtotal = 0;
 
     if (carrinho.length === 0) {
         container.innerHTML = `
-            <div class="text-center py-12 text-gray-400 flex flex-col items-center gap-2">
-                <i class="fas fa-shopping-basket text-4xl" aria-hidden="true"></i>
+            <div class="text-center py-12 text-black font-medium flex flex-col items-center gap-2">
+                <i class="fas fa-shopping-basket text-4xl text-black" aria-hidden="true"></i>
                 <p>Seu carrinho está vazio.</p>
             </div>`;
         if (freteContainer) freteContainer.classList.add('hidden');
@@ -256,20 +242,20 @@ function atualizarCarrinho() {
             subtotal += item.preco * item.quantidade;
 
             const div = document.createElement('div');
-            div.className = "flex gap-3 bg-gray-50 p-3 rounded-xl border border-gray-100 items-center";
+            div.className = "flex gap-3 bg-gray-50 p-3 rounded-xl border border-gray-200 items-center";
             div.innerHTML = `
                 <img src="${item.capa}" alt="Miniatura ${item.titulo}" class="w-12 h-16 object-cover rounded-md shadow-sm">
                 <div class="flex-grow min-w-0">
-                    <h4 class="font-bold text-sm text-gray-900 truncate">${item.titulo}</h4>
-                    <p class="text-xs text-indigo-600 font-semibold">${formatarMoeda(item.preco)}</p>
+                    <h4 class="font-bold text-sm text-black truncate">${item.titulo}</h4>
+                    <p class="text-xs text-black font-bold">${formatarMoeda(item.preco)}</p>
                     <div class="flex items-center gap-2 mt-1">
-                        <button onclick="alterarQuantidade(${item.id}, -1)" class="w-5 h-5 bg-white border border-gray-200 rounded text-xs flex items-center justify-center hover:bg-gray-100 font-bold cursor-pointer" aria-label="Diminuir quantidade">-</button>
-                        <span class="text-xs font-bold text-gray-700">${item.quantidade}</span>
-                        <button onclick="alterarQuantidade(${item.id}, 1)" class="w-5 h-5 bg-white border border-gray-200 rounded text-xs flex items-center justify-center hover:bg-gray-100 font-bold cursor-pointer" aria-label="Aumentar quantidade">+</button>
+                        <button onclick="alterarQuantidade(${item.id}, -1)" class="w-5 h-5 bg-white border border-gray-300 rounded text-xs flex items-center justify-center hover:bg-gray-100 font-bold cursor-pointer text-black" aria-label="Diminuir quantidade">-</button>
+                        <span class="text-xs font-bold text-black">${item.quantidade}</span>
+                        <button onclick="alterarQuantidade(${item.id}, 1)" class="w-5 h-5 bg-white border border-gray-300 rounded text-xs flex items-center justify-center hover:bg-gray-100 font-bold cursor-pointer text-black" aria-label="Aumentar quantidade">+</button>
                     </div>
                 </div>
-                <button onclick="removerDoCarrinho(${item.id})" class="text-red-400 hover:text-red-600 p-1 text-sm cursor-pointer" aria-label="Remover item">
-                    <i class="fas fa-trash" aria-hidden="true"></i>
+                <button onclick="removerDoCarrinho(${item.id})" class="text-black hover:text-gray-600 p-1 text-sm cursor-pointer" aria-label="Remover item">
+                    <i class="fas fa-trash text-black" aria-hidden="true"></i>
                 </button>
             `;
             fragmento.appendChild(div);
@@ -277,7 +263,6 @@ function atualizarCarrinho() {
         container.appendChild(fragmento);
     }
 
-    // Regras de cálculo de frete
     let frete = 0;
     const META_FRETE_GRATIS = 150.00;
     const VALOR_FRETE_PADRAO = 15.00;
@@ -285,68 +270,65 @@ function atualizarCarrinho() {
     if (subtotal > 0) {
         if (subtotal >= META_FRETE_GRATIS) {
             frete = 0;
-            if (avisoFrete) avisoFrete.innerHTML = "🎉 <span class='text-green-600 font-bold'>Você ganhou Frete Grátis!</span>";
+            if (avisoFrete) avisoFrete.innerHTML = "🎉 <span class='text-black font-black underline'>Você ganhou Frete Grátis!</span>";
             if (barraFrete) {
                 barraFrete.style.width = "100%";
-                barraFrete.className = "bg-green-500 h-2 rounded-full transition-all duration-500";
+                barraFrete.className = "bg-black h-2 rounded-full transition-all duration-500";
             }
         } else {
             frete = VALOR_FRETE_PADRAO;
             const faltam = META_FRETE_GRATIS - subtotal;
-            if (avisoFrete) avisoFrete.innerHTML = `Faltam <span class='text-indigo-600 font-bold'>${formatarMoeda(faltam)}</span>`;
+            if (avisoFrete) avisoFrete.innerHTML = `Faltam <span class='text-black font-bold underline'>${formatarMoeda(faltam)}</span>`;
             
             if (barraFrete) {
                 const porcentagem = (subtotal / META_FRETE_GRATIS) * 100;
                 barraFrete.style.width = `${porcentagem}%`;
-                barraFrete.className = "bg-indigo-600 h-2 rounded-full transition-all duration-500";
+                barraFrete.className = "bg-black h-2 rounded-full transition-all duration-500";
             }
         }
     }
 
     const valorTotal = subtotal + frete;
 
-    // Injeção de textos formatados com segurança
     contador.innerText = totalItens;
     subtotalElemento.innerText = formatarMoeda(subtotal);
     freteElemento.innerText = (frete === 0 && subtotal > 0) ? "Grátis" : formatarMoeda(frete);
     totalElemento.innerText = formatarMoeda(valorTotal);
 }
 
-// Funções do Modal de Detalhes (Refatorado)
 function abrirModal(id) {
     const livro = LIVROS.find(l => l.id === id);
     if (!livro) return;
 
     const modal = document.getElementById('modal-detalhes');
     const conteudo = document.getElementById('modal-conteudo');
-    
     if (!modal || !conteudo) return;
 
     conteudo.innerHTML = `
         <div class="flex flex-col md:flex-row">
-            <img src="${livro.capa}" alt="Capa ampliada de ${livro.titulo}" class="w-full md:w-64 h-64 md:h-auto object-cover">
-            <div class="p-6 flex flex-col justify-between flex-grow">
+            <img src="${livro.capa}" alt="Capa de ${livro.titulo}" class="w-full md:w-64 h-64 md:h-auto object-cover">
+            <div class="p-6 flex flex-col justify-between flex-grow text-black">
                 <div>
-                    <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">${livro.genero}</span>
-                    <h2 class="text-2xl font-bold text-gray-900 mt-1 mb-1">${livro.titulo}</h2>
-                    <p class="text-gray-600 text-xs mb-4">Por: <span class="font-semibold">${livro.autor}</span></p>
+                    <span class="text-xs font-bold uppercase text-black tracking-wider underline">${livro.genero}</span>
+                    <h2 class="text-2xl font-bold text-black mt-1 mb-1">${livro.titulo}</h2>
+                    <p class="text-black text-xs mb-4 font-medium">Por: <span class="font-bold">${livro.autor}</span></p>
                     
-                    <div class="grid grid-cols-3 gap-2 bg-gray-50 p-2.5 rounded-xl text-center text-xs font-semibold text-gray-600 mb-4">
-                        <div><p class="text-gray-400 font-normal">Ano</p><p class="text-gray-900">${livro.ano}</p></div>
-                        <div><p class="text-gray-400 font-normal">Páginas</p><p class="text-gray-900">${livro.paginas}</p></div>
-                        <div><p class="text-gray-400 font-normal">Avaliação</p><p class="text-amber-500"><i class="fas fa-star" aria-hidden="true"></i> ${livro.avaliacao}</p></div>
+                    <div class="grid grid-cols-3 gap-2 bg-gray-100 p-2.5 rounded-xl text-center text-xs font-bold text-black mb-4 border border-gray-200">
+                        <div><p class="text-black font-normal opacity-70">Ano</p><p class="text-black">${livro.ano}</p></div>
+                        <div><p class="text-black font-normal opacity-70">Páginas</p><p class="text-black">${livro.paginas}</p></div>
+                        <div><p class="text-black font-normal opacity-70">Avaliação</p><p class="text-black"><i class="fas fa-star text-black" aria-hidden="true"></i> ${livro.avaliacao}</p></div>
                     </div>
 
-                    <h4 class="text-xs font-bold text-gray-900 uppercase tracking-wider mb-1">Sinopse</h4>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-6">${livro.sinopse}</p>
+                    <h4 class="text-xs font-bold text-black uppercase tracking-wider mb-1">Sinopse</h4>
+                    <p class="text-black text-sm leading-relaxed mb-6">${livro.sinopse}</p>
                 </div>
 
-                <div class="pt-4 border-t border-gray-100 flex items-center justify-between gap-4">
+                <div class="pt-4 border-t border-gray-200 flex items-center justify-between gap-4">
                     <div>
-                        <p class="text-xs text-gray-400 font-medium">Preço</p>
-                        <p class="text-2xl font-black text-gray-900">${formatarMoeda(livro.preco)}</p>
+                        <p class="text-xs text-black font-medium opacity-70">Preço</p>
+                        <p class="text-2xl font-black text-black">${formatarMoeda(livro.preco)}</p>
                     </div>
-                    <button onclick="adicionarAoCarrinho(${livro.id}); fecharModal();" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl transition shadow-md flex items-center gap-2 cursor-pointer">
+                    <button onclick="adicionarAoCarrinho(${livro.id}); fecharModal();" class="bg-black hover:bg-gray-800 text-white font-bold px-6 py-3 rounded-xl transition shadow-md flex items-center gap-2 cursor-pointer">
                         <i class="fas fa-shopping-basket" aria-hidden="true"></i> Adicionar ao Carrinho
                     </button>
                 </div>
@@ -367,7 +349,6 @@ function fecharModal() {
 
     modal.style.opacity = "0";
     modal.firstElementChild.classList.add('scale-95');
-    
     setTimeout(() => {
         modal.classList.add('hidden');
     }, 300);
@@ -377,7 +358,6 @@ function fecharModalExterno(e) {
     if (e.target === document.getElementById('modal-detalhes')) fecharModal();
 }
 
-// Disparador do alerta de finalização simulada
 function finalizarCompra() {
     if (carrinho.length === 0) {
         alert("Seu carrinho está vazio!");
@@ -388,19 +368,17 @@ function finalizarCompra() {
     const freteStr = document.getElementById('carrinho-frete')?.innerText || 'R$ 0,00';
     const totalStr = document.getElementById('carrinho-total')?.innerText || 'R$ 0,00';
     
-    alert(`🎉 SIMULAÇÃO DE COMPRA CONCLUÍDA!\n\n📋 Resumo do Pedido:\n🔹 Produtos: ${subtotalStr}\n🚚 Frete: ${freteStr}\n💰 Total Pago: ${totalStr}\n\nObrigado por testar o sistema estruturado da BiblioTech!`);
+    alert(`🎉 SIMULAÇÃO DE COMPRA CONCLUÍDA!\n\n📋 Resumo do Pedido:\n🔹 Produtos: ${subtotalStr}\n🚚 Frete: ${freteStr}\n💰 Total Pago: ${totalStr}\n\nObrigado por testar o sistema minimalista da BiblioTech!`);
     
     carrinho = [];
     atualizarCarrinho();
     fecharCarrinho();
 }
 
-// Tratamento e normalização simples de string para o sistema de busca
 const barraBusca = document.getElementById('search-input');
 if (barraBusca) {
     barraBusca.addEventListener('input', (e) => {
         const termo = e.target.value.trim().toLowerCase();
-        
         const filtrados = LIVROS.filter(l => 
             l.titulo.toLowerCase().includes(termo) || 
             l.autor.toLowerCase().includes(termo) || 
@@ -410,7 +388,6 @@ if (barraBusca) {
     });
 }
 
-// Inicialização segura do app
 document.addEventListener('DOMContentLoaded', () => {
     renderizarLivros(LIVROS);
 });
