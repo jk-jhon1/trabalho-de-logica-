@@ -270,7 +270,7 @@ function atualizarCarrinho() {
     if (subtotal > 0) {
         if (subtotal >= META_FRETE_GRATIS) {
             frete = 0;
-            if (avisoFrete) avisoFrete.innerHTML = "🎉 <span class='text-black font-black underline'>Você ganhou Frete Grátis!</span>";
+            if (avisoFrete) avisoFrete.innerHTML = "🎉 <span class='text-black font-black underline'>Você ganhou Frete Grátis Tricolor!</span>";
             if (barraFrete) {
                 barraFrete.style.width = "100%";
                 barraFrete.className = "bg-black h-2 rounded-full transition-all duration-500";
@@ -368,7 +368,7 @@ function finalizarCompra() {
     const freteStr = document.getElementById('carrinho-frete')?.innerText || 'R$ 0,00';
     const totalStr = document.getElementById('carrinho-total')?.innerText || 'R$ 0,00';
     
-    alert(`🎉 SIMULAÇÃO DE COMPRA CONCLUÍDA!\n\n📋 Resumo do Pedido:\n🔹 Produtos: ${subtotalStr}\n🚚 Frete: ${freteStr}\n💰 Total Pago: ${totalStr}\n\nObrigado por testar o sistema minimalista da livraria para baicho!`);
+    alert(`🎉 COMPRA CONCLUÍDA OBRIGADPO POR AJUDAR O TRICOLOR\n\n📋 Resumo do Pedido:\n🔹 Produtos: ${subtotalStr}\n🚚 Frete: ${freteStr}\n💰 Total Pago: ${totalStr}\n\nObrigado por testar o sistema minimalista da livraria para baicho!`);
     
     carrinho = [];
     atualizarCarrinho();
