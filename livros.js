@@ -368,7 +368,7 @@ function finalizarCompra() {
     const freteStr = document.getElementById('carrinho-frete')?.innerText || 'R$ 0,00';
     const totalStr = document.getElementById('carrinho-total')?.innerText || 'R$ 0,00';
     
-    alert(`🎉 SIMULAÇÃO DE COMPRA CONCLUÍDA!\n\n📋 Resumo do Pedido:\n🔹 Produtos: ${subtotalStr}\n🚚 Frete: ${freteStr}\n💰 Total Pago: ${totalStr}\n\nObrigado por testar o sistema minimalista da BiblioTech!`);
+    alert(`🎉 SIMULAÇÃO DE COMPRA CONCLUÍDA!\n\n📋 Resumo do Pedido:\n🔹 Produtos: ${subtotalStr}\n🚚 Frete: ${freteStr}\n💰 Total Pago: ${totalStr}\n\nObrigado por testar o sistema minimalista da livraria para baicho!`);
     
     carrinho = [];
     atualizarCarrinho();
