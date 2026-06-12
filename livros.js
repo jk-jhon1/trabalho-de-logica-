@@ -6,7 +6,6 @@ const LIVROS = [
         genero: "Fantasia",
         ano: 1954,
         paginas: 436,
-        avaliacao: 4.9,
         preco: 59.90,
         capa: "https://images.unsplash.com/photo-1629992184111-37ea190444b3?w=500&auto=format&fit=crop&q=60",
         sinopse: "Em uma terra fantástica e cheia de magia, um jovem hobbit chamado Frodo Bolseiro recebe a tarefa de destruir o Anel Um, uma arma de poder absolutista criada pelo Senhor Sombrio, Sauron."
@@ -18,7 +17,6 @@ const LIVROS = [
         genero: "Distopia",
         ano: 1949,
         paginas: 336,
-        avaliacao: 4.8,
         preco: 39.90,
         capa: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=500&auto=format&fit=crop&q=60",
         sinopse: "Winston Smith vive aprisionado na engrenagem totalitária de uma sociedade dominada pelo Grande Irmão. Uma crítica feroz ao autoritarismo."
@@ -30,7 +28,6 @@ const LIVROS = [
         genero: "Literatura",
         ano: 1899,
         paginas: 256,
-        avaliacao: 4.6,
         preco: 24.90,
         capa: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=500&auto=format&fit=crop&q=60",
         sinopse: "Bento Santiago narra suas memórias e reconta sua história de amor com a enigmática Capitu. Capitu traiu ou não traiu Bentinho?"
@@ -42,7 +39,6 @@ const LIVROS = [
         genero: "Ciência",
         ano: 1988,
         paginas: 256,
-        avaliacao: 4.7,
         preco: 45.00,
         capa: "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=500&auto=format&fit=crop&q=60",
         sinopse: "Uma das mentes mais brilhantes do nosso tempo guia o leitor leigo através das perguntas mais profundas sobre o universo."
@@ -54,7 +50,6 @@ const LIVROS = [
         genero: "Desenvolvimento",
         ano: 2018,
         paginas: 320,
-        avaliacao: 4.9,
         preco: 52.80,
         capa: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=500&auto=format&fit=crop&q=60",
         sinopse: "Um guia prático e científico sobre como pequenas mudanças diárias podem gerar resultados extraordinários a longo prazo."
@@ -66,7 +61,6 @@ const LIVROS = [
         genero: "História",
         ano: 2011,
         paginas: 464,
-        avaliacao: 4.8,
         preco: 64.90,
         capa: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500&auto=format&fit=crop&q=60",
         sinopse: "O autor repassa a história da humanidade desde a evolução dos primeiros humanos até as revoluções do século XXI."
@@ -78,7 +72,6 @@ const LIVROS = [
         genero: "Fantasia",
         ano: 1937,
         paginas: 328,
-        avaliacao: 4.8,
         preco: 49.90,
         capa: "https://images.unsplash.com/photo-1610116306796-6fea9f4fae38?w=500&auto=format&fit=crop&q=60",
         sinopse: "Bilbo Bolseiro era um hobbit de vida pacata até que o mago Gandalf o contrata para uma jornada perigosa atrás de um tesouro."
@@ -90,19 +83,62 @@ const LIVROS = [
         genero: "Ficção Científica",
         ano: 1965,
         paginas: 680,
-        avaliacao: 4.7,
         preco: 69.90,
         capa: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=500&auto=format&fit=crop&q=60",
         sinopse: "Ambientado num futuro distante num planeta desértico Arrakis, a obra acompanha o jovem Paul Atreides e a disputa pela Especiaria."
     }
 ];
 
+// Base de dados inicial de comentários padrão
+const AVALIACOES_PADRAO = {
+    1: [
+        { usuario: "João Silva", nota: 5, comentario: "Uma obra-prima absoluta da fantasia medieval!", data: "10/05/2026" },
+        { usuario: "Mariana Costa", nota: 5, comentario: "O melhor livro que já li. A jornada de Frodo é incrível.", data: "22/05/2026" }
+    ],
+    2: [
+        { usuario: "Ricardo Alves", nota: 5, comentario: "Uma crítica genial e atemporal ao totalitarismo.", data: "14/04/2026" }
+    ],
+    3: [
+        { usuario: "Fernanda Dias", nota: 4, comentario: "Clássico nacional. Capitu traiu ou não traiu?", data: "18/03/2026" }
+    ],
+    4: [
+        { usuario: "Lucas Mendes", nota: 5, comentario: "Conceitos complexos explicados de forma muito acessível.", data: "12/02/2026" }
+    ],
+    5: [
+        { usuario: "Juliana Frota", nota: 5, comentario: "Mudou completamente a minha rotina diária.", data: "01/05/2026" }
+    ],
+    6: [
+        { usuario: "Gabriela Nunes", nota: 4, comentario: "Fascinante panorama sobre a evolução da nossa espécie.", data: "20/01/2026" }
+    ],
+    7: [
+        { usuario: "Rodrigo Santos", nota: 5, comentario: "Leitura leve, divertida e muito encantadora.", data: "03/03/2026" }
+    ],
+    8: [
+        { usuario: "Felipe Melo", nota: 5, comentario: "O ápice da ficção científica política e planetária.", data: "09/05/2026" }
+    ]
+};
+
+// Gerenciamento de Estado Global com LocalStorage
 let carrinho = [];
+let bancoAvaliacoes = JSON.parse(localStorage.getItem('bibliotech_avaliacoes')) || AVALIACOES_PADRAO;
+let notaSelecionadaNoForm = 5;
+
+function salvarAvaliacoesNoStorage() {
+    localStorage.setItem('bibliotech_avaliacoes', JSON.stringify(bancoAvaliacoes));
+}
+
+function obterMediaAvaliacao(idLivro) {
+    const lista = bancoAvaliacoes[idLivro] || [];
+    if (lista.length === 0) return "5.0";
+    const soma = lista.reduce((acc, curr) => acc + curr.nota, 0);
+    return (soma / lista.length).toFixed(1);
+}
 
 function formatarMoeda(valor) {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
+// Renderização Principal do Catálogo
 function renderizarLivros(listaDeLivros) {
     const grid = document.getElementById('livros-grid');
     if (!grid) return;
@@ -117,6 +153,7 @@ function renderizarLivros(listaDeLivros) {
     const fragmento = document.createDocumentFragment();
 
     listaDeLivros.forEach(livro => {
+        const mediaEstrelas = obterMediaAvaliacao(livro.id);
         const card = document.createElement('div');
         card.className = "bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition duration-300 flex flex-col border border-gray-200";
         
@@ -124,7 +161,7 @@ function renderizarLivros(listaDeLivros) {
             <div class="relative cursor-pointer overflow-hidden group" onclick="abrirModal(${livro.id})">
                 <img src="${livro.capa}" alt="Capa do livro ${livro.titulo}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300" loading="lazy">
                 <span class="absolute top-2 right-2 bg-black text-white text-xs font-bold px-2 py-1 rounded-md">
-                    <i class="fas fa-star text-white" aria-hidden="true"></i> ${livro.avaliacao}
+                    <i class="fas fa-star text-white" aria-hidden="true"></i> ${mediaEstrelas}
                 </span>
             </div>
             <div class="p-5 flex flex-col flex-grow justify-between">
@@ -150,6 +187,7 @@ function renderizarLivros(listaDeLivros) {
     grid.appendChild(fragmento);
 }
 
+// Controle do Carrinho
 function abrirCarrinho() {
     const fundo = document.getElementById('carrinho-fundo');
     const lateral = document.getElementById('carrinho-lateral');
@@ -184,7 +222,8 @@ function adicionarAoCarrinho(id) {
     if (itemNoCarrinho) {
         itemNoCarrinho.quantidade += 1;
     } else {
-        carrinho.push({ ...livro, House: 1, quantidade: 1 });
+        // CORRIGIDO: Removido o bug estrutural 'House: 1' presente anteriormente
+        carrinho.push({ ...livro, quantidade: 1 });
     }
 
     atualizarCarrinho();
@@ -270,7 +309,7 @@ function atualizarCarrinho() {
     if (subtotal > 0) {
         if (subtotal >= META_FRETE_GRATIS) {
             frete = 0;
-            if (avisoFrete) avisoFrete.innerHTML = "🎉 <span class='text-black font-black underline'>Você ganhou Frete Grátis Tricolor!</span>";
+            if (avisoFrete) avisoFrete.innerHTML = "🎉 <span class='text-black font-black underline'>Você ganhou Frete Grátis!</span>";
             if (barraFrete) {
                 barraFrete.style.width = "100%";
                 barraFrete.className = "bg-black h-2 rounded-full transition-all duration-500";
@@ -296,6 +335,7 @@ function atualizarCarrinho() {
     totalElemento.innerText = formatarMoeda(valorTotal);
 }
 
+// Modal de Detalhes com Aba de Comentários Integrada
 function abrirModal(id) {
     const livro = LIVROS.find(l => l.id === id);
     if (!livro) return;
@@ -303,6 +343,34 @@ function abrirModal(id) {
     const modal = document.getElementById('modal-detalhes');
     const conteudo = document.getElementById('modal-conteudo');
     if (!modal || !conteudo) return;
+
+    const mediaEstrelas = obterMediaAvaliacao(livro.id);
+    const avaliacoesDoLivro = bancoAvaliacoes[id] || [];
+
+    // OTIMIZAÇÃO: Geração limpa e sem reflow da lista de comentários
+    let comentariosHtml = "";
+    if (avaliacoesDoLivro.length === 0) {
+        comentariosHtml = `<p class="text-sm text-black opacity-60 italic">Nenhuma avaliação enviada para este livro ainda.</p>`;
+    } else {
+        avaliacoesDoLivro.forEach(av => {
+            let estrelasHtml = "";
+            for (let i = 1; i <= 5; i++) {
+                estrelasHtml += i <= av.nota 
+                    ? `<i class="fas fa-star text-black text-xs"></i>` 
+                    : `<i class="far fa-star text-black text-xs"></i>`;
+            }
+            comentariosHtml += `
+                <div class="border-b border-gray-200 pb-3 mb-3 last:border-b-0 last:pb-0 last:mb-0">
+                    <div class="flex justify-between items-center mb-0.5">
+                        <span class="font-bold text-sm text-black">${av.usuario}</span>
+                        <span class="text-xs text-black opacity-50 font-medium">${av.data}</span>
+                    </div>
+                    <div class="flex gap-0.5 mb-1">${estrelasHtml}</div>
+                    <p class="text-sm text-black leading-relaxed">${av.comentario}</p>
+                </div>
+            `;
+        });
+    }
 
     conteudo.innerHTML = `
         <div class="flex flex-col md:flex-row">
@@ -316,14 +384,44 @@ function abrirModal(id) {
                     <div class="grid grid-cols-3 gap-2 bg-gray-100 p-2.5 rounded-xl text-center text-xs font-bold text-black mb-4 border border-gray-200">
                         <div><p class="text-black font-normal opacity-70">Ano</p><p class="text-black">${livro.ano}</p></div>
                         <div><p class="text-black font-normal opacity-70">Páginas</p><p class="text-black">${livro.paginas}</p></div>
-                        <div><p class="text-black font-normal opacity-70">Avaliação</p><p class="text-black"><i class="fas fa-star text-black" aria-hidden="true"></i> ${livro.avaliacao}</p></div>
+                        <div><p class="text-black font-normal opacity-70">Avaliação</p><p class="text-black"><i class="fas fa-star text-black" aria-hidden="true"></i> ${mediaEstrelas}</p></div>
                     </div>
 
                     <h4 class="text-xs font-bold text-black uppercase tracking-wider mb-1">Sinopse</h4>
                     <p class="text-black text-sm leading-relaxed mb-6">${livro.sinopse}</p>
+
+                    <div class="pt-4 border-t border-gray-200 mb-6">
+                        <h4 class="text-xs font-bold text-black uppercase tracking-wider mb-3">Avaliações dos Leitores (${avaliacoesDoLivro.length})</h4>
+                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 max-h-48 overflow-y-auto space-y-3">
+                            ${comentariosHtml}
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-200 mb-2">
+                        <h4 class="text-xs font-bold text-black uppercase tracking-wider mb-3">Deixe seu Comentário</h4>
+                        <form onsubmit="salvarNovaAvaliacaoForm(event, ${livro.id})" class="space-y-3">
+                            <input type="text" id="form-usuario" placeholder="Seu nome completo" required class="w-full text-sm px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-black bg-white text-black">
+                            
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-black uppercase tracking-wider">Sua Nota:</span>
+                                <div class="flex gap-1">
+                                    <i id="star-input-1" onclick="definirNotaNoForm(1)" class="fas fa-star text-black cursor-pointer text-base"></i>
+                                    <i id="star-input-2" onclick="definirNotaNoForm(2)" class="fas fa-star text-black cursor-pointer text-base"></i>
+                                    <i id="star-input-3" onclick="definirNotaNoForm(3)" class="fas fa-star text-black cursor-pointer text-base"></i>
+                                    <i id="star-input-4" onclick="definirNotaNoForm(4)" class="fas fa-star text-black cursor-pointer text-base"></i>
+                                    <i id="star-input-5" onclick="definirNotaNoForm(5)" class="fas fa-star text-black cursor-pointer text-base"></i>
+                                </div>
+                            </div>
+
+                            <textarea id="form-comentario" placeholder="O que você achou desta obra?" rows="2" required class="w-full text-sm px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-black bg-white text-black resize-none"></textarea>
+                            <button type="submit" class="text-xs bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg transition cursor-pointer shadow-sm">
+                                Publicar Avaliação
+                            </button>
+                        </form>
+                    </div>
                 </div>
 
-                <div class="pt-4 border-t border-gray-200 flex items-center justify-between gap-4">
+                <div class="pt-4 border-t border-gray-200 flex items-center justify-between gap-4 mt-4">
                     <div>
                         <p class="text-xs text-black font-medium opacity-70">Preço</p>
                         <p class="text-2xl font-black text-black">${formatarMoeda(livro.preco)}</p>
@@ -336,11 +434,66 @@ function abrirModal(id) {
         </div>
     `;
 
+    notaSelecionadaNoForm = 5;
+    definirNotaNoForm(5);
+
     modal.classList.remove('hidden');
     setTimeout(() => {
         modal.style.opacity = "1";
         modal.firstElementChild.classList.remove('scale-95');
     }, 20);
+}
+
+// Manipulação do Formulário Dinâmico de Estrelas
+function definirNotaNoForm(nota) {
+    notaSelecionadaNoForm = nota;
+    for (let i = 1; i <= 5; i++) {
+        const estrela = document.getElementById(`star-input-${i}`);
+        if (estrela) {
+            estrela.className = i <= nota 
+                ? "fas fa-star text-black cursor-pointer text-base" 
+                : "far fa-star text-black cursor-pointer text-base";
+        }
+    }
+}
+
+function salvarNovaAvaliacaoForm(event, idLivro) {
+    event.preventDefault();
+    
+    const usuarioInput = document.getElementById('form-usuario');
+    const comentarioInput = document.getElementById('form-comentario');
+    
+    if (!usuarioInput || !comentarioInput) return;
+
+    const novaAvaliacao = {
+        usuario: usuarioInput.value.trim(),
+        nota: notaSelecionadaNoForm,
+        comentario: comentarioInput.value.trim(),
+        data: new Date().toLocaleDateString('pt-BR')
+    };
+
+    if (!bancoAvaliacoes[idLivro]) {
+        bancoAvaliacoes[idLivro] = [];
+    }
+
+    bancoAvaliacoes[idLivro].push(novaAvaliacao);
+    salvarAvaliacoesNoStorage();
+
+    // Feedback visual
+    alert("Sua avaliação foi publicada e processada com sucesso!");
+
+    // Atualiza o grid principal para refletir a nova média imediatamente
+    const barraBusca = document.getElementById('search-input');
+    const termo = barraBusca ? barraBusca.value.trim().toLowerCase() : "";
+    const filtrados = LIVROS.filter(l => 
+        l.titulo.toLowerCase().includes(termo) || 
+        l.autor.toLowerCase().includes(termo) || 
+        l.genero.toLowerCase().includes(termo)
+    );
+    renderizarLivros(filtrados);
+
+    // Reabre o próprio modal atualizado com o novo comentário listado
+    abrirModal(idLivro);
 }
 
 function fecharModal() {
@@ -368,13 +521,14 @@ function finalizarCompra() {
     const freteStr = document.getElementById('carrinho-frete')?.innerText || 'R$ 0,00';
     const totalStr = document.getElementById('carrinho-total')?.innerText || 'R$ 0,00';
     
-    alert(`🎉 COMPRA CONCLUÍDA OBRIGADPO POR AJUDAR O TRICOLOR\n\n📋 Resumo do Pedido:\n🔹 Produtos: ${subtotalStr}\n🚚 Frete: ${freteStr}\n💰 Total Pago: ${totalStr}\n\nObrigado por testar o sistema minimalista da livraria para baicho!`);
+    alert(`🎉 COMPRA CONCLUÍDA OBRIGADO!\n\n📋 Resumo do Pedido:\n🔹 Produtos: ${subtotalStr}\n🚚 Frete: ${freteStr}\n💰 Total Pago: ${totalStr}\n\nObrigado por testar o sistema minimalista da Livraria para Baiho!`);
     
     carrinho = [];
     atualizarCarrinho();
     fecharCarrinho();
 }
 
+// Sistema de Busca Integrado
 const barraBusca = document.getElementById('search-input');
 if (barraBusca) {
     barraBusca.addEventListener('input', (e) => {
@@ -391,61 +545,3 @@ if (barraBusca) {
 document.addEventListener('DOMContentLoaded', () => {
     renderizarLivros(LIVROS);
 });
-
-class Avaliacao {
-    constructor(usuario, nota, comentario) {
-        this.usuario = usuario;
-        this.nota = nota; // Esperado um valor de 1 a 5
-        this.comentario = comentario;
-        this.data = new Date().toLocaleDateString('pt-BR');
-    }
-}
-
-class Livro {
-    constructor(id, titulo, autor) {
-        this.id = id;
-        this.titulo = titulo;
-        this.autor = autor;
-        this.avaliacoes = [];
-    }
-
-    // Método para adicionar uma nova avaliação
-    adicionarAvaliacao(usuario, nota, comentario = "") {
-        if (nota < 1 || nota > 5) {
-            return console.error("Erro: A nota deve ser entre 1 e 5.");
-        }
-        
-        const novaAvaliacao = new Avaliacao(usuario, nota, comentario);
-        this.avaliacoes.push(novaAvaliacao);
-        console.log(`Avaliação de ${usuario} adicionada com sucesso!`);
-    }
-
-    // Método para calcular a média de estrelas do livro
-    obterMediaAvaliacoes() {
-        if (this.avaliacoes.length === 0) {
-            return "Nenhuma avaliação ainda.";
-        }
-
-        const somaNotas = this.avaliacoes.reduce((soma, aval) => soma + aval.nota, 0);
-        const media = somaNotas / this.avaliacoes.length;
-        
-        return media.toFixed(1); // Retorna a média com 1 casa decimal (ex: 4.5)
-    }
-
-    // Exibir todas as avaliações
-    mostrarAvaliacoes() {
-        console.log(`\n--- Avaliações para: ${this.titulo} ---`);
-        console.log(`Média Geral: ${this.obterMediaAvaliacoes()} ⭐`);
-        this.avaliacoes.forEach(av => {
-            console.log(`[${av.data}] ${av.usuario} deu ${av.nota}⭐ - "${av.comentario}"`);
-        });
-    }
-}
-
-// Testando o sistema:
-const meuLivro = new Livro(1, "O Senhor dos Anéis", "J.R.R. Tolkien");
-
-meuLivro.adicionarAvaliacao("jhonjk8", 5, "Obra prima da fantasia!");
-meuLivro.adicionarAvaliacao("SmoothJhonjk", 4, "Muito bom, mas o começo é um pouco lento.");
-
-meuLivro.mostrarAvaliacoes();
