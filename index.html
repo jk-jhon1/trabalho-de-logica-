@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteca Comunitária</title>
+    <title>BiblioTech - Sua Biblioteca Digital</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col">
 
-    <nav class="bg-indigo-600 text-white shadow-md sticky top-0 z-50">
+    <!-- Navbar -->
+    <nav class="bg-indigo-600 text-white shadow-md sticky top-0 z-40">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold flex items-center gap-2">
                 <i class="fas fa-book-open"></i> BiblioTech
@@ -17,49 +19,62 @@
             <div class="flex gap-6">
                 <a href="#acervo" class="hover:text-indigo-200 transition">Acervo</a>
                 <a href="#sobre" class="hover:text-indigo-200 transition">Sobre</a>
-                <a href="#contato" class="hover:text-indigo-200 transition">Contato</a>
             </div>
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <header class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-20 text-center px-4">
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Explore Novos Mundos Sem Sair de Casa</h1>
-        <p class="text-xl max-w-2xl mx-auto opacity-90">Busque livros, descubra novos autores e gerencie suas leituras na nossa biblioteca digital.</p>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Explore Novos Mundos</h1>
+        <p class="text-xl max-w-2xl mx-auto opacity-90">Busque livros por título, autor, gênero ou ano no nosso acervo expandido.</p>
         
+        <!-- Barra de Busca -->
         <div class="mt-8 max-w-md mx-auto relative">
-            <input type="text" id="search-input" placeholder="Busque por título, autor ou gênero..." class="w-full px-5 py-3 rounded-full text-gray-800 shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
-            <button class="absolute right-3 top-3 text-indigo-600 hover:text-indigo-800">
+            <input type="text" id="search-input" placeholder="O que você quer ler hoje?..." class="w-full px-5 py-3 rounded-full text-gray-800 shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
+            <button class="absolute right-3 top-3 text-indigo-600">
                 <i class="fas fa-search text-xl"></i>
             </button>
         </div>
     </header>
 
-    <main id="acervo" class="max-w-6xl mx-auto px-4 py-12">
-        <h2 class="text-3xl font-bold mb-8 text-center text-gray-900">Nosso Acervo</h2>
+    <!-- Seção do Acervo -->
+    <main id="acervo" class="max-w-6xl mx-auto px-4 py-12 flex-grow w-full">
+        <h2 class="text-3xl font-bold mb-8 text-center text-gray-900">Nosso Acervo Expandido</h2>
         
+        <!-- Grid de Livros -->
         <div id="livros-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            </div>
+            <!-- Os livros serão injetados aqui -->
+        </div>
     </main>
 
-    <footer class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
-        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div id="sobre">
-                <h3 class="text-xl font-semibold text-white mb-4">Sobre Nós</h3>
-                <p class="text-gray-400 leading-relaxed">A BiblioTech é um projeto de biblioteca digital feito para facilitar o acesso à leitura e incentivar a comunidade a explorar novos conhecimentos.</p>
-            </div>
-            <div id="contato">
-                <h3 class="text-xl font-semibold text-white mb-4">Contato</h3>
-                <p class="mb-2"><i class="fas fa-envelope mr-2 text-indigo-400"></i> contato@bibliotech.com</p>
-                <p><i class="fas fa-phone mr-2 text-indigo-400"></i> (11) 99999-9999</p>
+    <!-- Janela de Detalhes (Modal) - Escondida por padrão -->
+    <div id="modal-detalhes" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative transform scale-95 transition-transform duration-300">
+            <!-- Botão Fechar -->
+            <button onclick="fecharModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 p-2 text-xl z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <!-- Conteúdo do Modal (Injetado via JS) -->
+            <div id="modal-conteudo"></div>
+        </div>
+    </div>
+
+    <!-- Sobre & Rodapé -->
+    <footer class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800 mt-auto">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8" id="sobre">
+            <div>
+                <h3 class="text-xl font-semibold text-white mb-4">Sobre a BiblioTech</h3>
+                <p class="text-gray-400 leading-relaxed">Uma plataforma moderna projetada para amantes da leitura. Nosso catálogo conta com obras clássicas, ficção científica, desenvolvimento pessoal e muito mais.</p>
             </div>
             <div>
-                <h3 class="text-xl font-semibold text-white mb-4">Horário de Funcionamento</h3>
-                <p class="text-gray-400">Segunda a Sexta: 8h às 20h</p>
-                <p class="text-gray-400">Sábados: 9h às 14h</p>
+                <h3 class="text-xl font-semibold text-white mb-4">Contato & Suporte</h3>
+                <p class="mb-2"><i class="fas fa-envelope mr-2 text-indigo-400"></i> suporte@bibliotech.com</p>
+                <p><i class="fas fa-location-dot mr-2 text-indigo-400"></i> Av. das Letras, 1000 - Centro</p>
             </div>
         </div>
         <div class="text-center text-sm text-gray-500 mt-12 pt-6 border-t border-gray-800">
-            &copy; 2026 BiblioTech. Todos os direitos reservados.
+            &copy; 2026 BiblioTech. Conectando leitores ao conhecimento.
         </div>
     </footer>
 
