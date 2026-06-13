@@ -10,7 +10,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         System.out.println("==================================================");
-        System.out.println("   BIBLIOTECH - MOTOR DE DISTRIBUIÇÃO OTIMIZADO   ");
+        System.out.println("   biblioteca para baicho - MOTOR DE DISTRIBUIÇÃO OTIMIZADO   ");
         System.out.println("==================================================");
         System.out.println("Sede Operacional: " + FreteService.SEDE_LOJA + "\n");
 
