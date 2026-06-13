@@ -97,18 +97,12 @@ const catalogoLivros = [
     }
 ];
 
-// Memória de estado global
 let carrinho = [];
 let livroSelecionadoId = null;
 
-// Roda automaticamente na abertura do DOM
 document.addEventListener("DOMContentLoaded", () => {
     renderizarVitrine(catalogoLivros);
 });
-
-// ============================================================================
-// COMPONENTE 2: LÓGICA E INTERAÇÃO VISUAL DO MODAL, IMAGEM E ESTRELAS CLICÁVEIS
-// ============================================================================
 
 function obterDetalhesLivro(id) {
     return catalogoLivros.find(l => l.id === id);
@@ -119,7 +113,7 @@ function mostrarDetalhes(id) {
     const livro = obterDetalhesLivro(id);
     if (!livro) return;
 
-    // Injeta os dados no Modal
+  
     document.getElementById("modal-capa").src = livro.capa;
     document.getElementById("modal-capa").alt = livro.titulo;
     document.getElementById("modal-genero").innerText = livro.genero;
@@ -129,16 +123,14 @@ function mostrarDetalhes(id) {
     document.getElementById("modal-sinopse").innerText = livro.sinopse;
     document.getElementById("modal-preco").innerText = `R$ ${livro.preco.toFixed(2)}`;
 
-    // Vincula botão de adicionar do modal
+ 
     const btnAdicionar = document.getElementById("modal-btn-adicionar");
     btnAdicionar.onclick = () => {
         adicionarAoCarrinho(id);
     };
-
-    // Monta as estrelas interativas clicáveis
+    
     renderizarEstrelasInterativas(livro.estrelas);
 
-    // Exibe o painel visual
     document.getElementById("modal-detalhes").classList.remove("hidden");
 }
 
@@ -158,7 +150,6 @@ function renderizarEstrelasInterativas(notaAtual) {
             i <= notaAtual ? 'text-yellow-500 font-bold' : 'text-gray-300'
         }`;
         
-        // Atribui a função de voto ao clicar em uma estrela
         estrelaBtn.onclick = () => avaliarLivro(livroSelecionadoId, i);
         container.appendChild(estrelaBtn);
     }
@@ -169,7 +160,6 @@ function avaliarLivro(id, novaNota) {
     if (livro) {
         livro.estrelas = novaNota;
         
-        // Atualiza imediatamente o modal aberto e a vitrine de fundo
         renderizarEstrelasInterativas(novaNota);
         renderizarVitrine(catalogoLivros);
     }
@@ -183,10 +173,6 @@ function gerarEstrelasHtml(nota) {
     html += '</div>';
     return html;
 }
-
-// ============================================================================
-// COMPONENTE 3: VITRINE DE PRODUTOS E BARRA DE BUSCA
-// ============================================================================
 
 function renderizarVitrine(lista) {
     const container = document.getElementById("vitrine-livros");
@@ -305,10 +291,6 @@ function atualizarCarrinhoHTML() {
         container.innerHTML += itemHtml;
     });
 }
-
-// ============================================================================
-// COMPONENTE 5: MANUTENÇÃO INTEGRAL DO MOTOR DE FRETE POR KM
-// ============================================================================
 
 function calcularFreteEAtualizar() {
     const rua = document.getElementById('input-rua').value;
