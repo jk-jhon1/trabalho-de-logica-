@@ -3,74 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Livraria Para Baicho - Livraria Online</title>
+    <title>BiblioTech - Livraria Online</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="bg-gray-100 font-sans min-h-screen">
+<body class="bg-gray-100 font-sans min-h-screen flex flex-col items-center">
 
-    <header class="bg-blue-600 text-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <h1 class="text-2xl font-bold tracking-wide">📚 Livraria Para baicho</h1>
+    <div class="w-full max-w-md bg-gray-50 min-h-screen shadow-2xl flex flex-col border-x border-gray-200">
+        
+        <header class="bg-blue-600 text-white shadow-md sticky top-0 z-50 px-4 py-4 flex flex-col gap-3">
+            <h1 class="text-xl font-bold tracking-wide text-center">📚 BiblioTech</h1>
             
-            <div class="w-full md:w-1/2 flex">
+            <div class="w-full flex shadow-sm">
                 <input type="text" id="busca-input" placeholder="Pesquise por título, autor ou gênero..." 
-                       class="w-full p-2 rounded-l text-gray-800 focus:outline-none bg-white">
-                <button onclick="filtrarLivros()" class="bg-blue-800 hover:bg-blue-900 px-6 rounded-r font-semibold transition">
+                       class="w-full p-2 rounded-l text-sm text-gray-800 focus:outline-none bg-white">
+                <button onclick="filtrarLivros()" class="bg-blue-800 hover:bg-blue-900 px-4 rounded-r text-sm font-semibold transition">
                     Buscar
                 </button>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <main class="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <div class="lg:col-span-2">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Catálogo de Livros</h2>
-            <div id="vitrine-livros" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                </div>
-        </div>
-
-        <div class="space-y-6">
+        <main class="flex-1 px-4 py-6 flex flex-col gap-6">
             
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <div>
+                <h2 class="text-lg font-bold text-gray-800 mb-4 border-b border-gray-200 pb-1">Catálogo de Livros</h2>
+                <div id="vitrine-livros" class="flex flex-col gap-5">
+                    </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow border border-gray-100">
+                <h2 class="text-base font-bold text-gray-800 mb-3 flex items-center gap-2">
                     🛒 Seu Carrinho
                 </h2>
-                <div id="itens-carrinho" class="space-y-3 divide-y divide-gray-100 max-h-60 overflow-y-auto mb-4">
-                    <p class="text-gray-500 text-sm py-2">O seu carrinho está vazio.</p>
+                <div id="itens-carrinho" class="space-y-2 divide-y divide-gray-100 max-h-48 overflow-y-auto mb-3">
+                    <p class="text-gray-500 text-xs py-1">O seu carrinho está vazio.</p>
                 </div>
-                <div class="border-t border-gray-200 pt-4">
-                    <div class="flex justify-between font-semibold text-gray-700">
+                <div class="border-t border-gray-200 pt-3">
+                    <div class="flex justify-between font-semibold text-xs text-gray-700">
                         <span>Subtotal dos Livros:</span>
                         <span id="subtotal-carrinho">R$ 0,00</span>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <div class="bg-white p-4 rounded-lg shadow border border-gray-100 mb-6">
+                <h2 class="text-base font-bold text-gray-800 mb-1 flex items-center gap-2">
                     🚚 Dados de Entrega
                 </h2>
-                <p class="text-xs text-gray-500 mb-4">
-                    Sede em: Rua Maria Sobania, 309 - Tindiquera. Taxa: R$ 0,30 por KM.
+                <p class="text-[10px] text-gray-400 mb-3">
+                    Sede: Rua Maria Sobania, 309 - Tindiquera. Taxa: R$ 0,30/KM.
                 </p>
                 
-                <div class="space-y-4">
+                <div class="space-y-3">
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Rua:</label>
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase mb-0.5">Rua:</label>
                         <input type="text" id="input-rua" placeholder="Ex: Av. das Nações" 
-                               class="w-full p-2 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                               class="w-full p-2 border border-gray-300 rounded text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
                     </div>
                     
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Número:</label>
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase mb-0.5">Número:</label>
                         <input type="text" id="input-numero" placeholder="Ex: 1520" 
-                               class="w-full p-2 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                               class="w-full p-2 border border-gray-300 rounded text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Bairro:</label>
-                        <select id="input-bairro" class="w-full p-2 border border-gray-300 rounded text-sm bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase mb-0.5">Bairro:</label>
+                        <select id="input-bairro" class="w-full p-2 border border-gray-300 rounded text-xs bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
                             <option value="">Selecione o seu bairro...</option>
                             <option value="Tindiquera">Tindiquera (Próximo à Sede)</option>
                             <option value="Centro">Centro</option>
@@ -84,29 +82,70 @@
                     </div>
 
                     <button onclick="calcularFreteEAtualizar()" 
-                            class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-sm transition cursor-pointer shadow">
+                            class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-xs transition cursor-pointer shadow">
                         Calcular Frete e Totais
                     </button>
                 </div>
 
-                <div id="resumo-frete" class="mt-5 p-4 bg-blue-50 rounded-lg border border-blue-100 hidden space-y-2 animate-fade-in">
-                    <div class="flex justify-between text-sm text-gray-700">
+                <div id="resumo-frete" class="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-100 hidden space-y-1.5">
+                    <div class="flex justify-between text-xs text-gray-600">
                         <span>Distância da Sede:</span>
                         <span id="txt-distancia" class="font-bold">0.00 KM</span>
                     </div>
-                    <div class="flex justify-between text-sm text-gray-700">
+                    <div class="flex justify-between text-xs text-gray-600">
                         <span>Taxa de Entrega:</span>
                         <span id="txt-valor-frete" class="font-bold text-green-700">R$ 0,00</span>
                     </div>
-                    <div class="border-t border-blue-200 pt-2 mt-2 flex justify-between items-center">
-                        <span class="font-bold text-gray-800">Valor Total Geral:</span>
-                        <span id="txt-total-geral" class="text-xl font-black text-blue-700">R$ 0,00</span>
+                    <div class="border-t border-blue-200 pt-1.5 mt-1.5 flex justify-between items-center">
+                        <span class="font-bold text-xs text-gray-800">Valor Total Geral:</span>
+                        <span id="txt-total-geral" class="text-base font-black text-blue-700">R$ 0,00</span>
                     </div>
                 </div>
+            </div>
+        </main>
+    </div>
 
+    <div id="modal-detalhes" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-lg shadow-2xl max-w-xs w-full max-h-[85vh] overflow-y-auto flex flex-col relative p-5 space-y-4">
+            
+            <button onclick="fecharModal()" class="absolute top-2 right-3 text-gray-400 hover:text-gray-600 text-2xl font-bold cursor-pointer z-10">
+                &times;
+            </button>
+            
+            <div class="flex items-center justify-center bg-gray-50 rounded-lg p-3 h-44 border border-gray-100 overflow-hidden">
+                <img id="modal-capa" src="" alt="" class="w-full h-full object-contain max-h-40 drop-shadow-md">
+            </div>
+            
+            <div class="flex flex-col space-y-3">
+                <div>
+                    <span id="modal-genero" class="text-[10px] font-bold text-blue-600 uppercase tracking-wide"></span>
+                    <h2 id="modal-titulo" class="text-lg font-black text-gray-800 mt-0.5 leading-tight"></h2>
+                    <p id="modal-autor" class="text-xs text-gray-500"></p>
+                    <p id="modal-meta" class="text-[10px] text-gray-400 mt-0.5"></p>
+                </div>
+                
+                <div>
+                    <h4 class="text-[10px] font-bold text-gray-700 uppercase tracking-wide border-b border-gray-100 pb-0.5 mb-1">Sinopse</h4>
+                    <p id="modal-sinopse" class="text-xs text-gray-600 leading-relaxed max-h-24 overflow-y-auto"></p>
+                </div>
+                
+                <div class="border-t border-gray-100 pt-3 space-y-3">
+                    <div>
+                        <span class="block text-[10px] font-bold text-gray-500 uppercase tracking-wide mb-1">Dê sua avaliação:</span>
+                        <div id="modal-estrelas-interativas" class="flex text-2xl gap-1">
+                            </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between gap-2 pt-1">
+                        <span id="modal-preco" class="text-xl font-black text-gray-900"></span>
+                        <button id="modal-btn-adicionar" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded text-xs transition cursor-pointer shadow">
+                            Adicionar 🛒
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </main>
+    </div>
 
     <script src="livros.js"></script>
 </body>
