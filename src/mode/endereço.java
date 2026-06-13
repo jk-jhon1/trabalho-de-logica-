@@ -1,11 +1,11 @@
 package model;
 
 public class Endereco {
-    private String rua;
-    private String numero;
-    private String bairro;
-    private String cidade;
-    private String cep;
+    private final String rua;
+    private final String numero;
+    private final String bairro;
+    private final String cidade;
+    private final String cep;
 
     public Endereco(String rua, String numero, String bairro, String cidade, String cep) {
         this.rua = rua;
@@ -15,7 +15,6 @@ public class Endereco {
         this.cep = cep;
     }
 
-    // Getters
     public String getRua() { return rua; }
     public String getNumero() { return numero; }
     public String getBairro() { return bairro; }
@@ -24,6 +23,6 @@ public class Endereco {
 
     @Override
     public String toString() {
-        return rua + ", " + numero + " - " + bairro + ", " + cidade + " (CEP: " + cep + ")";
+        return String.format("%s, %s - %s, %s (CEP: %s)", rua, numero, bairro, cidade, cep);
     }
 }
