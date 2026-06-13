@@ -1,21 +1,25 @@
 package model;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Livro {
-    private int id;
-    private String titulo;
-    private String autor;
-    private String genero;
-    private int ano;
-    private int paginas;
-    private double preco;
-    private String capa;
-    private String sinopse;
-    private final List<Avaliacao> avaliacoes;
+    private final int id;
+    private final String titulo;
+    private final String autor;
+    private final String genero;
+    private final int ano;
+    private final int paginas;
+    private final BigDecimal preco; // Corrigido para BigDecimal
+    private final String capa;
+    private final String sinopse;
+    
+    // CORREÇÃO: Lista thread-safe para evitar quebras em ambientes concorrentes (múltiplos acessos)
+    private final List<Avaliacao> avaliacoes = new CopyOnWriteArrayList<>();
 
-    public Livro(int id, String titulo, String autor, String genero, int ano, int paginas, double preco, String capa, String sinopse) {
+    public Livro(int id, String titulo, String autor, String genero, int ano, int paginas, BigDecimal preco, String capa, String sinopse) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
@@ -25,33 +29,33 @@ public class Livro {
         this.preco = preco;
         this.capa = capa;
         this.sinopse = sinopse;
-        this.avaliacoes = new ArrayList<>();
     }
 
-    // Método otimizado para calcular a média de estrelas (com 1 casa decimal)
+    // Otimização da média com Java Streams de forma limpa e arredondamento correto
     public double getMediaAvaliacao() {
         if (avaliacoes.isEmpty()) return 5.0;
         
-        double soma = avaliacoes.stream()
-                                .mapToDouble(Avaliacao::getNota)
-                                .sum();
-        
-        double media = soma / avaliacoes.size();
-        return Math.round(media * 10.0) / 10.0;
+        double media = avaliacoes.stream()
+                .mapToInt(Avaliacao::getNota)
+                .average()
+                .orElse(5.0);
+                
+        return BigDecimal.valueOf(media).setScale(1, RoundingMode.HALF_UP).doubleValue();
     }
 
     public void adicionarAvaliacao(Avaliacao avaliacao) {
-        this.avaliacoes.add(avaliacao);
+        if (avaliacao != null) {
+            this.avaliacoes.add(avaliacao);
+        }
     }
 
-    // Getters essenciais
     public int getId() { return id; }
     public String getTitulo() { return titulo; }
     public String getAutor() { return autor; }
     public String getGenero() { return genero; }
     public int getAno() { return ano; }
     public int getPaginas() { return paginas; }
-    public double getPreco() { return preco; }
+    public BigDecimal getPreco() { return preco; }
     public String getCapa() { return capa; }
     public String getSinopse() { return sinopse; }
     public List<Avaliacao> getAvaliacoes() { return avaliacoes; }
