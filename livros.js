@@ -131,7 +131,7 @@ const catalogoLivros = [
         paginas: 112,
         estrelas: 4
     },
-    ];
+];
 
 let carrinho = [];
 let livroSelecionadoId = null;
