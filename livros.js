@@ -94,7 +94,13 @@ const catalogoLivros = [
         ano: 1965,
         paginas: 680,
         estrelas: 5
-    }
+    },
+    {
+        id: 9,
+        titulo: "authentic games: A batalha da Torre",
+        autor: "marco túlio",
+        
+            
 ];
 
 let carrinho = [];
