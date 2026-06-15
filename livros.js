@@ -130,7 +130,8 @@ const catalogoLivros = [
         ano: 2017,
         paginas: 112,
         estrelas: 4
-    },];
+    },
+    ];
 
 let carrinho = [];
 let livroSelecionadoId = null;
