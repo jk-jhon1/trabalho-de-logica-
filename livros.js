@@ -113,7 +113,7 @@ const catalogoLivros = [
         autor: "Marco Túlio",
         genero: "ficção de ação e aventura",
         preco: 49.90,
-        capa: "hhttps://m.media-amazon.com/images/I/91U+KRrZbWL._SL1500_.jpg",
+        capa: "https://m.media-amazon.com/images/I/91y8WC8ACTL._SL1500_.jpg",
         sinopse: "Depois de ser resgatado de um terrível sequestro, AUTHENTICGAMES está de volta para proteger a Vila Farmer. Mas antes ele precisará encarar uma nova aventura para recuperar sua espada de diamante.",
         ano: 2016,
         paginas: 112,
