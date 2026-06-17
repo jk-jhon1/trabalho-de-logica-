@@ -105,7 +105,7 @@ const catalogoLivros = [
         sinopse: "Um sequestro misterioso coloca o nosso herói AUTHENTICGAMES em uma grande enrascada, e ele vai precisar de ajuda para sair dessa.",
         ano: 2016,
         paginas: 112,
-        estrelas: 4
+        estrelas: 5
     },
     {
         id: 10,
@@ -117,7 +117,7 @@ const catalogoLivros = [
         sinopse: "Depois de ser resgatado de um terrível sequestro, AUTHENTICGAMES está de volta para proteger a Vila Farmer. Mas antes ele precisará encarar uma nova aventura para recuperar sua espada de diamante.",
         ano: 2016,
         paginas: 112,
-        estrelas: 4
+        estrelas: 5
     },
     {
         id: 11,
@@ -129,15 +129,15 @@ const catalogoLivros = [
         sinopse: "No último livro da trilogia AuthenticGames, Builder, Nina e Authentic vão até a sombria dimensão do The End para enfrentar novos desafios e salvar o mundo da superfície das terríveis ameaças do Ender Dragon.",
         ano: 2017,
         paginas: 112,
-        estrelas: 4
+        estrelas: 5
     },
     {
         id: 12,
         titulo: "Viagem à Alma Tricolor em 7 Epopeias",
         autor: "Léo Gerchmann",
         genero: "Crônica Esportiva",
-        preco: 35,00,
-        capa: "blob:https://web.whatsapp.com/e89e739f-6468-44c8-a9a0-608e9fd5f84d",
+        preco: 35.00,
+        capa: "https://m.media-amazon.com/images/I/81qapBfiIwL._SL1500_.jpg",
         sinopse: "O livro que você tem em mãos é uma assumida ousadia. Pretende desvendar os escaninhos de uma paixão.",
         ano: 2016,
         paginas: 125,
@@ -149,7 +149,7 @@ const catalogoLivros = [
         autor: "Miguel de Cervantes",
         genero: "Romance",
         preco: 74.90,
-        capa: "blob:https://web.whatsapp.com/dc989cf3-1ab5-4701-a0fd-a7dd6a44eef8",
+        capa: "https://m.media-amazon.com/images/I/71Pdb+CCMVL._SL1500_.jpg",
         sinopse: "Dom Quixote é uma das maiores obras da literatura universal, um romance que transcende séculos e continua a encantar gerações. ",
         ano: 2024,
         paginas: 1152,
@@ -158,10 +158,10 @@ const catalogoLivros = [
     {
         id: 14,
         titulo: "o rei de amarelo",
-        autor: "Richard W. Chambers",
+        autor: "Robert W. Chambers",
         genero: "Terror, Fantasia e Ficção",
         preco: 54.00,
-        capa: "blob:https://web.whatsapp.com/dc989cf3-1ab5-4701-a0fd-a7dd6a44eef8",
+        capa: "https://m.media-amazon.com/images/I/81ykCXocSOL._SL1500_.jpg",
         sinopse: "Obra-prima de Robert W. Chambers, O Rei de Amarelo é uma coletânea de contos de terror fantástico publicada originalmente em 1895 e considerada um marco do gênero.",
         ano: 2014,
         paginas: 256,
@@ -173,11 +173,11 @@ const catalogoLivros = [
         autor: "Harlan Ellison",
         genero: "Ficção Cientifica e Terror Psicológico",
         preco: 2064.32,
-        capa: "blob:https://web.whatsapp.com/f6ca688e-d708-4568-ae51-a4ce1f6a2117",
-        sinopse: "a história-título pós-apocalíptica, vencedora do prêmio Hugo, desta coletânea de sete contos e a história que encerra o volume, 'Pretty Maggie Moneyeyes.",
+        capa: "https://m.media-amazon.com/images/I/91ew3HlZmXL._SL1500_.jpg",
+        sinopse: "A história-título pós-apocalíptica, vencedora do prêmio Hugo, desta coletânea de sete contos e a história que encerra o volume, 'Pretty Maggie Moneyeyes.",
         ano: 2014,
         paginas: 162,
-        estrelas: 5
+        estrelas: 4
     },
     {
         id: 16,
@@ -198,7 +198,7 @@ const catalogoLivros = [
         genero: "Autobiografia",
         preco: 49.90,
         capa: "blob:https://web.whatsapp.com/5bfd9a21-f9bb-4d58-8f42-66fcdadae35e",
-        sinopse: " O mineiro Marco Túlio sempre foi apaixonado por games. Tão apaixonado que decidiu enfrentar a timidez e criar um canal no YouTube para falar dos jogos de que gostava. Com seu jeito simples e engraçado, Marco Túlio transformou o AuthenticGames em ponto de encontro para quase 4 milhões de crianças e adolescentes. É lá que eles trocam ideias, aprendem estratégias secretas sobre Minecraft e acompanham as séries exclusivas. Neste livro, os fãs vão saber como surgiu o projeto do canal, quem são os amigos da internet que o Authentic levou para a vida real e muito mais! Um dos youtubers mais amados do Brasil conta todos os seus segredos. Mais de 1 bilhão de visualizações!",
+        sinopse: "O mineiro Marco Túlio sempre foi apaixonado por games. Tão apaixonado que decidiu enfrentar a timidez e criar um canal no YouTube para falar dos jogos de que gostava. Com seu jeito simples e engraçado, Marco Túlio transformou o AuthenticGames em ponto de encontro para quase 4 milhões de crianças e adolescentes. É lá que eles trocam ideias, aprendem estratégias secretas sobre Minecraft e acompanham as séries exclusivas. Neste livro, os fãs vão saber como surgiu o projeto do canal, quem são os amigos da internet que o Authentic levou para a vida real e muito mais! Um dos youtubers mais amados do Brasil conta todos os seus segredos. Mais de 1 bilhão de visualizações!",
         ano: 2016,
         paginas: 160,
         estrelas: 5
@@ -214,6 +214,18 @@ const catalogoLivros = [
         ano: 2018,
         paginas: 160,
         estrelas: 5
+    },
+    {
+        id: 19,
+        titulo: "Como Conversar com Seu Cachorro Sobre Homossexualidade e Comunismo",
+        autor: "Alexander Blythe",
+        genero: "Ficção Humorística e Sátira",
+        preco: 5.99,
+        capa: "https://m.media-amazon.com/images/I/71hTp3F2VQL._SL1500_.jpg",
+        sinopse: "Você será guiado por um percurso singular, onde os diálogos habituais entre tutor e pet são transformados em conversas significativas sobre temas contemporâneos e sociais.",
+        ano: 2024,
+        paginas: 38,
+        estrelas: 4
     },
 ];
 
