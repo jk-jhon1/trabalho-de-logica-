@@ -143,7 +143,7 @@ const catalogoLivros = [
         paginas: 125,
         estrelas: 5
     },
-     {
+    {
         id: 13,
         titulo: "Kit 2 Livros Dom Quixote - Tomo 1 e 2 - Edição Integral",
         autor: "Miguel de Cervantes",
@@ -155,7 +155,7 @@ const catalogoLivros = [
         paginas: 1152,
         estrelas: 4
     },
-      {
+    {
         id: 14,
         titulo: "o rei de amarelo",
         autor: "Richard W. Chambers",
@@ -167,7 +167,7 @@ const catalogoLivros = [
         paginas: 256,
         estrelas: 4
     },
-     {
+    {
         id: 15,
         titulo: "I Have No Mouth and I Must Scream: Stories",
         autor: "Harlan Ellison",
@@ -179,7 +179,7 @@ const catalogoLivros = [
         paginas: 162,
         estrelas: 5
     },
-     {
+    {
         id: 16,
         titulo: "O diário perdido de Gravity falls",
         autor: "Alex Hirsch",
@@ -203,7 +203,7 @@ const catalogoLivros = [
         paginas: 160,
         estrelas: 5
     },
-     {
+    {
         id: 18,
         titulo: "Authenticgames: vivendo uma vida autêntica 2",
         autor: "Marco Túlio",
