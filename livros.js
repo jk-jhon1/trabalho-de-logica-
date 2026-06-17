@@ -131,7 +131,91 @@ const catalogoLivros = [
         paginas: 112,
         estrelas: 4
     },
-];
+    {
+        id: 12,
+        titulo: "Viagem à Alma Tricolor em 7 Epopeias",
+        autor: "Léo Gerchmann",
+        genero: "Crônica Esportiva",
+        preco: 35,00,
+        capa: "blob:https://web.whatsapp.com/e89e739f-6468-44c8-a9a0-608e9fd5f84d",
+        sinopse: "O livro que você tem em mãos é uma assumida ousadia. Pretende desvendar os escaninhos de uma paixão.",
+        ano: 2016,
+        paginas: 125,
+        estrelas: 5
+    },
+     {
+        id: 13,
+        titulo: "Kit 2 Livros Dom Quixote - Tomo 1 e 2 - Edição Integral",
+        autor: "Miguel de Cervantes",
+        genero: "Romance",
+        preco: 74.90,
+        capa: "blob:https://web.whatsapp.com/dc989cf3-1ab5-4701-a0fd-a7dd6a44eef8",
+        sinopse: "Dom Quixote é uma das maiores obras da literatura universal, um romance que transcende séculos e continua a encantar gerações. ",
+        ano: 2024,
+        paginas: 1152,
+        estrelas: 4
+    },
+      {
+        id: 14,
+        titulo: "o rei de amarelo",
+        autor: "Richard W. Chambers",
+        genero: "Terror, Fantasia e Ficção",
+        preco: 54.00,
+        capa: "blob:https://web.whatsapp.com/dc989cf3-1ab5-4701-a0fd-a7dd6a44eef8",
+        sinopse: "Obra-prima de Robert W. Chambers, O Rei de Amarelo é uma coletânea de contos de terror fantástico publicada originalmente em 1895 e considerada um marco do gênero.",
+        ano: 2014,
+        paginas: 256,
+        estrelas: 4
+    },
+     {
+        id: 15,
+        titulo: "I Have No Mouth and I Must Scream: Stories",
+        autor: "Harlan Ellison",
+        genero: "Ficção Cientifica e Terror Psicológico",
+        preco: 2064.32,
+        capa: "blob:https://web.whatsapp.com/f6ca688e-d708-4568-ae51-a4ce1f6a2117",
+        sinopse: "a história-título pós-apocalíptica, vencedora do prêmio Hugo, desta coletânea de sete contos e a história que encerra o volume, 'Pretty Maggie Moneyeyes.",
+        ano: 2014,
+        paginas: 162,
+        estrelas: 5
+    },
+     {
+        id: 16,
+        titulo: "O diário perdido de Gravity falls",
+        autor: "Alex Hirsch",
+        genero: "Ficção",
+        preco: 60.86,
+        capa: "blob:https://web.whatsapp.com/c7baf9a8-9a68-4ec5-920b-f6ed96ef73d8",
+        sinopse: "Você possui em suas mãos o cobiçado diário do autor da série Gravity Falls , um tesouro de 288 páginas coloridas e sem dono, com segredos nunca antes revelados, monstros e mistérios da pacata cidade do Tivô Stan.",
+        ano: 2020,
+        paginas: 288,
+        estrelas: 5
+    },
+    {
+        id: 17,
+        titulo: "Authenticgames: vivendo uma vida autêntica",
+        autor: "Marco Túlio",
+        genero: "Autobiografia",
+        preco: 49.90,
+        capa: "blob:https://web.whatsapp.com/5bfd9a21-f9bb-4d58-8f42-66fcdadae35e",
+        sinopse: " O mineiro Marco Túlio sempre foi apaixonado por games. Tão apaixonado que decidiu enfrentar a timidez e criar um canal no YouTube para falar dos jogos de que gostava. Com seu jeito simples e engraçado, Marco Túlio transformou o AuthenticGames em ponto de encontro para quase 4 milhões de crianças e adolescentes. É lá que eles trocam ideias, aprendem estratégias secretas sobre Minecraft e acompanham as séries exclusivas. Neste livro, os fãs vão saber como surgiu o projeto do canal, quem são os amigos da internet que o Authentic levou para a vida real e muito mais! Um dos youtubers mais amados do Brasil conta todos os seus segredos. Mais de 1 bilhão de visualizações!",
+        ano: 2016,
+        paginas: 160,
+        estrelas: 5
+    },
+     {
+        id: 18,
+        titulo: "Authenticgames: vivendo uma vida autêntica 2",
+        autor: "Marco Túlio",
+        genero: "Autobiografia",
+        preco: 49.90,
+        capa: "blob:https://web.whatsapp.com/5bfd9a21-f9bb-4d58-8f42-66fcdadae35e",
+        sinopse: "Marco Túlio está de volta para compartilhar com os maninhos e as maninhas mais um pouco de suas histórias e aventuras. Sim, porque a vida autêntica continua... E como continua! Com uma vida completamente diferente e cheia de mudanças",
+        ano: 2018,
+        paginas: 160,
+        estrelas: 5
+    },
+ ];
 
 let carrinho = [];
 let livroSelecionadoId = null;
