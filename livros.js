@@ -185,7 +185,7 @@ const catalogoLivros = [
         autor: "Alex Hirsch",
         genero: "Ficção",
         preco: 60.86,
-        capa: "bhttps://m.media-amazon.com/images/I/91OvTwFvWKL._SL1500_.jpg",
+        capa: "https://m.media-amazon.com/images/I/91OvTwFvWKL._SL1500_.jpg",
         sinopse: "Você possui em suas mãos o cobiçado diário do autor da série Gravity Falls , um tesouro de 288 páginas coloridas e sem dono, com segredos nunca antes revelados, monstros e mistérios da pacata cidade do Tivô Stan.",
         ano: 2020,
         paginas: 288,
