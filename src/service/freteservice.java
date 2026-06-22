@@ -12,9 +12,9 @@ public class FreteService {
         "Rua Maria Sobania", "309", "Tindiquera", "Araucária", "83708-160"
     );
     
-    private static final BigDecimal VALOR_POR_KM = new BigDecimal("3000.00");
+    private static final BigDecimal VALOR_POR_KM = new BigDecimal("0.30");
     private static final BigDecimal META_FRETE_GRATIS = new BigDecimal("150.00");
-    private static final BigDecimal TAXA_MINIMA_FRETE = new BigDecimal("3000.00");
+    private static final BigDecimal TAXA_MINIMA_FRETE = new BigDecimal("3.00");
 
     private static final Map<String, Double> DISTANCIAS_BAIRROS = new ConcurrentHashMap<>();
 
