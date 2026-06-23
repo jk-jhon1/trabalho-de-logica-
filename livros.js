@@ -1,5 +1,5 @@
 const catalogoLivros = [
-     { 
+    { 
         id: 1, 
         titulo: "O Senhor dos Anéis: A Sociedade do Anel", 
         autor: "J.R.R. Tolkien", 
@@ -229,10 +229,10 @@ const catalogoLivros = [
     },
 ];
 
-
 let carrinho = [];
 let livroSelecionadoId = null;
-let usuarioLogado = false;
+let usuarioLogado = null; // Armazenará o objeto com os dados do usuário conectado
+
 document.addEventListener("DOMContentLoaded", () => {
     renderizarVitrine(catalogoLivros);
 });
@@ -285,6 +285,7 @@ function gerarEstrelasHtml(nota) {
     return html + '</div>';
 }
 
+
 function renderizarVitrine(lista) {
     const container = document.getElementById("vitrine-livros");
     container.innerHTML = "";
@@ -319,6 +320,7 @@ function filtrarLivros() {
     const termo = document.getElementById("busca-input").value.toLowerCase().trim();
     renderizarVitrine(catalogoLivros.filter(l => l.titulo.toLowerCase().includes(termo) || l.autor.toLowerCase().includes(termo)));
 }
+
 
 function adicionarAoCarrinho(id) {
     const livro = catalogoLivros.find(l => l.id === id);
@@ -379,10 +381,8 @@ function iniciarCheckout() {
     }
 
     if (!usuarioLogado) {
-      
         document.getElementById("modal-login").classList.remove("hidden");
     } else {
-        
         concluirCompraSucesso();
     }
 }
@@ -393,18 +393,23 @@ function fecharModalLogin() {
 
 function processarLogin() {
    
+    const nome = document.getElementById("login-nome").value;
+    const cpf = document.getElementById("login-cpf").value;
     const email = document.getElementById("login-email").value;
     const senha = document.getElementById("login-senha").value;
 
-    if(email && senha) {
-        usuarioLogado = true; 
+    if(nome && cpf && email && senha) {
+         
+        usuarioLogado = { nome, cpf, email }; 
         fecharModalLogin(); 
         concluirCompraSucesso(); 
     }
 }
 
 function concluirCompraSucesso() {
-    alert("🎉 Pagamento e Pedido Concluídos com Sucesso!\nObrigado por comprar na Livraria Para Baicho.\nObriogado por ajudar os Guinomos!");
+   
+    const nomeCliente = usuarioLogado ? usuarioLogado.nome : "Cliente";
+    alert(`🎉 Pedido Concluído com Sucesso!\nObrigado por comprar na BiblioTech, ${nomeCliente}.`);
     
     carrinho = [];
     atualizarCarrinhoHTML();
