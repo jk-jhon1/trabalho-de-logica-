@@ -409,7 +409,7 @@ function processarLogin() {
 function concluirCompraSucesso() {
    
     const nomeCliente = usuarioLogado ? usuarioLogado.nome : "Cliente";
-    alert(`🎉 Pedido Concluído com Sucesso!\nObrigado por comprar na BiblioTech, ${nomeCliente}.`);
+    alert(`🎉 Pedido Concluído com Sucesso!\nObrigado por comprar na Livraria Para Baicho., ${nomeCliente}.\nObriogado por ajudar os Guinomos!`);
     
     carrinho = [];
     atualizarCarrinhoHTML();
