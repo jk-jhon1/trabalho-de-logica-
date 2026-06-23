@@ -12,7 +12,7 @@
         
         <header class="bg-blue-600 text-white shadow-md sticky top-0 z-50 px-4 py-4 flex flex-col gap-3">
             <div class="flex justify-between items-center">
-                <h1 class="text-xl font-bold tracking-wide text-center w-full">📚Livraria Para Baicho</h1>
+                <h1 class="text-xl font-bold tracking-wide text-center w-full">📚 Livraria Para Baicho</h1>
             </div>
             
             <div class="w-full flex shadow-sm">
@@ -145,15 +145,25 @@
     </div>
 
     <div id="modal-login" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center hidden p-4">
-        <div class="bg-white rounded-lg shadow-2xl max-w-xs w-full flex flex-col relative p-6 space-y-4 animate-fade-in">
+        <div class="bg-white rounded-lg shadow-2xl max-w-xs w-full flex flex-col relative p-6 space-y-4">
             <button onclick="fecharModalLogin()" class="absolute top-2 right-3 text-gray-400 hover:text-gray-600 text-2xl font-bold cursor-pointer z-10">&times;</button>
             
-            <div class="text-center mb-2">
+            <div class="text-center mb-1">
                 <h2 class="text-xl font-black text-gray-800">Acesse sua Conta</h2>
-                <p class="text-[11px] text-gray-500 mt-1">Para finalizar seu pedido, faça login ou cadastre-se.</p>
+                <p class="text-[11px] text-gray-500 mt-1">Identifique-se para finalizar seu pedido.</p>
             </div>
 
             <form id="form-login" class="space-y-3" onsubmit="event.preventDefault(); processarLogin();">
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Nome Completo</label>
+                    <input type="text" id="login-nome" required placeholder="Digite seu nome" 
+                           class="w-full p-2 border border-gray-300 rounded text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">CPF</label>
+                    <input type="text" id="login-cpf" required placeholder="000.000.000-00" 
+                           class="w-full p-2 border border-gray-300 rounded text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
                 <div>
                     <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">E-mail</label>
                     <input type="email" id="login-email" required placeholder="seu@email.com" 
@@ -169,7 +179,7 @@
                 </button>
             </form>
 
-            <div class="text-center mt-2 border-t border-gray-100 pt-3">
+            <div class="text-center mt-1 border-t border-gray-100 pt-3">
                 <a href="#" class="text-[11px] text-blue-600 hover:underline font-semibold">Ainda não tem conta? Cadastre-se</a>
             </div>
         </div>
