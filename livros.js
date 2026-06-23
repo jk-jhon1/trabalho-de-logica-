@@ -404,7 +404,7 @@ function processarLogin() {
 }
 
 function concluirCompraSucesso() {
-    alert("🎉 Pagamento e Pedido Concluídos com Sucesso!\nObrigado por comprar na BiblioTech.");
+    alert("🎉 Pagamento e Pedido Concluídos com Sucesso!\nObrigado por comprar na Livraria Para Baicho.\nObriogado por ajudar os Guinomos!");
     
     carrinho = [];
     atualizarCarrinhoHTML();
