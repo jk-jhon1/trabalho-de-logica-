@@ -227,7 +227,7 @@ const catalogoLivros = [
         paginas: 38,
         estrelas: 4
     },
-        {
+    {
         id: 20,
         titulo: "Noites Brancas",
         autor: "Fiódor Dostoiévski",
@@ -239,7 +239,7 @@ const catalogoLivros = [
         paginas: 80,
         estrelas: 5
     
-     },
+    },
     {
         id: 21,
         titulo: "O Pequeno Príncipe",
@@ -251,7 +251,7 @@ const catalogoLivros = [
         ano: 1943,
         paginas: 96,
         estrelas: 5 
-     },
+    },
     {
         id: 22,
         titulo: "Fundamentos do xadrez",
@@ -384,7 +384,7 @@ const catalogoLivros = [
         paginas: 48,
         estrelas: 5
      },
-    {
+     {
         id: 33,
         titulo: "Authenticgames: Lendas de acampamento",
         autor: "Marco Túlio",
