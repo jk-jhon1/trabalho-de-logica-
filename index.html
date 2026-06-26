@@ -4,15 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livraria Para Baicho - Livraria Online</title>
-    
+ 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-gray-100 font-sans min-h-screen flex flex-col items-center">
 
     <div class="w-full max-w-md bg-gray-50 min-h-screen shadow-2xl flex flex-col border-x border-gray-200">
-     
+        
         <header class="bg-blue-600 text-white shadow-md sticky top-0 z-50 px-4 py-4 flex flex-col gap-3">
-            <h1 class="text-xl font-bold tracking-wide text-center w-full">📚 Livraria Para Baicho</h1>
+         
+            <div class="flex justify-between items-center w-full">
+                <h1 class="text-xl font-bold tracking-wide">📚 Livraria Para Baicho</h1>
+                
+               
+                <button onclick="document.getElementById('sessao-carrinho').scrollIntoView({behavior: 'smooth'})" 
+                        class="relative bg-blue-800 hover:bg-blue-900 p-2 rounded-full transition cursor-pointer shadow-sm flex items-center justify-center">
+                    <span class="text-lg">🛒</span>
+                  
+                    <span id="badge-carrinho" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden shadow">
+                        0
+                    </span>
+                </button>
+            </div>
+
             <div class="w-full flex shadow-sm">
                 <input type="text" id="busca-input" placeholder="Pesquise por título, autor..." 
                        class="w-full p-2 rounded-l text-sm text-gray-800 focus:outline-none bg-white">
@@ -27,11 +41,10 @@
             <div>
                 <h2 class="text-lg font-bold text-gray-800 mb-4 border-b border-gray-200 pb-1">Catálogo de Livros</h2>
                 <div id="vitrine-livros" class="flex flex-col gap-5">
-
                 </div>
             </div>
 
-            <div class="bg-white p-4 rounded-lg shadow border border-gray-100">
+            <div id="sessao-carrinho" class="bg-white p-4 rounded-lg shadow border border-gray-100 scroll-mt-32">
                 <div class="flex justify-between items-center mb-3">
                     <h2 class="text-base font-bold text-gray-800 flex items-center gap-2">🛒 Seu Carrinho</h2>
                     <span class="text-[9px] font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full uppercase tracking-wider">Frete Grátis > R$ 150</span>
