@@ -520,7 +520,7 @@ const catalogoLivros = [
 
 let carrinho = [];
 let livroSelecionadoId = null;
-let usuarioLogado = null; // Armazenará o objeto com os dados do usuário conectado
+let usuarioLogado = null; 
 
 document.addEventListener("DOMContentLoaded", () => {
     renderizarVitrine(catalogoLivros);
@@ -574,7 +574,6 @@ function gerarEstrelasHtml(nota) {
     return html + '</div>';
 }
 
-
 function renderizarVitrine(lista) {
     const container = document.getElementById("vitrine-livros");
     container.innerHTML = "";
@@ -610,13 +609,15 @@ function filtrarLivros() {
     renderizarVitrine(catalogoLivros.filter(l => l.titulo.toLowerCase().includes(termo) || l.autor.toLowerCase().includes(termo)));
 }
 
-
 function adicionarAoCarrinho(id) {
     const livro = catalogoLivros.find(l => l.id === id);
     if (livro) {
         carrinho.push(livro);
         atualizarCarrinhoHTML();
-        if (!document.getElementById("resumo-frete").classList.contains("hidden")) calcularFreteEAtualizar();
+  
+        if (!document.getElementById("resumo-frete").classList.contains("hidden")) {
+            calcularFreteEAtualizar();
+        }
     }
 }
 
@@ -627,6 +628,7 @@ function removerDoCarrinho(index) {
         document.getElementById('resumo-frete').classList.add('hidden');
         document.getElementById('resumo-frete').classList.remove('flex');
     } else if (!document.getElementById("resumo-frete").classList.contains("hidden")) {
+        
         calcularFreteEAtualizar();
     }
 }
@@ -636,6 +638,7 @@ function calcularSubtotal() { return carrinho.reduce((soma, item) => soma + item
 function atualizarCarrinhoHTML() {
     const container = document.getElementById("itens-carrinho");
     document.getElementById("subtotal-carrinho").innerText = `R$ ${calcularSubtotal().toFixed(2)}`;
+    
     if (carrinho.length === 0) {
         container.innerHTML = `<p class="text-gray-500 text-xs py-1">O seu carrinho está vazio.</p>`;
         return;
@@ -649,14 +652,56 @@ function atualizarCarrinhoHTML() {
 
 function calcularFreteEAtualizar() {
     if (carrinho.length === 0) return alert("Adicione itens ao carrinho primeiro.");
-    const rua = document.getElementById('input-rua').value, num = document.getElementById('input-numero').value, bairro = document.getElementById('input-bairro').value;
-    if (!rua || !num || !bairro) return alert("Preencha todos os dados de entrega.");
+    
+    const rua = document.getElementById('input-rua').value;
+    const num = document.getElementById('input-numero').value;
+    const bairro = document.getElementById('input-bairro').value;
+    
+    if (!rua || !num || !bairro) return alert("Preencha a rua, número e bairro para calcular a entrega.");
 
-    let valorFrete = (carrinho.length * 2.5) + (bairro.length * 0.5); 
-    const totalGeral = calcularSubtotal() + valorFrete;
+    const distanciasBairros = {
+        "tindiquera": 1.2,
+        "centro": 3.5,
+        "fazenda velha": 5.8,
+        "estacao": 7.4,
+        "costeira": 9.1,
+        "iguacu": 11.3,
+        "capela velha": 14.6,
+        "cachoeira": 19.2
+    };
 
-    document.getElementById('txt-distancia').innerText = `~${(valorFrete/0.3).toFixed(1)} KM`;
-    document.getElementById('txt-valor-frete').innerText = `R$ ${valorFrete.toFixed(2)}`;
+    const bairroLimpo = bairro.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+    let distanciaBase = distanciasBairros[bairroLimpo] || 15.0; 
+
+    let hashNumero = 0;
+    for (let i = 0; i < num.length; i++) hashNumero = num.charCodeAt(i) + ((hashNumero << 5) - hashNumero);
+    const distanciaFinal = distanciaBase + ((Math.abs(hashNumero) % 5) * 0.35);
+
+    const VALOR_POR_KM = 0.30;
+    const META_FRETE_GRATIS = 150.00;
+    const TAXA_MINIMA_FRETE = 3.00;
+
+    const subtotalCarrinho = calcularSubtotal();
+    let valorFrete = 0.00;
+
+    if (subtotalCarrinho < META_FRETE_GRATIS) {
+        let calculado = distanciaFinal * VALOR_POR_KM;
+        valorFrete = Math.max(calculado, TAXA_MINIMA_FRETE); // Garante a taxa mínima
+    }
+
+    const totalGeral = subtotalCarrinho + valorFrete;
+
+    document.getElementById('txt-distancia').innerText = `${distanciaFinal.toFixed(2)} KM`;
+    
+    const freteElemento = document.getElementById('txt-valor-frete');
+    if (valorFrete === 0 && subtotalCarrinho >= META_FRETE_GRATIS) {
+        freteElemento.innerText = "GRÁTIS! 🎉";
+        freteElemento.className = "font-black text-green-600";
+    } else {
+        freteElemento.innerText = `R$ ${valorFrete.toFixed(2)}`;
+        freteElemento.className = "font-bold text-gray-700";
+    }
+
     document.getElementById('txt-total-geral').innerText = `R$ ${totalGeral.toFixed(2)}`;
     
     document.getElementById('resumo-frete').classList.remove('hidden');
@@ -681,14 +726,12 @@ function fecharModalLogin() {
 }
 
 function processarLogin() {
-   
     const nome = document.getElementById("login-nome").value;
     const cpf = document.getElementById("login-cpf").value;
     const email = document.getElementById("login-email").value;
     const senha = document.getElementById("login-senha").value;
 
     if(nome && cpf && email && senha) {
-         
         usuarioLogado = { nome, cpf, email }; 
         fecharModalLogin(); 
         concluirCompraSucesso(); 
@@ -696,9 +739,8 @@ function processarLogin() {
 }
 
 function concluirCompraSucesso() {
-   
     const nomeCliente = usuarioLogado ? usuarioLogado.nome : "Cliente";
-    alert(`🎉 Pedido Concluído com Sucesso!\nObrigado por comprar na Livraria Para Baicho., ${nomeCliente}.\nObriogado por ajudar os Guinomos!`);
+    alert(`🎉 Pedido Concluído com Sucesso!\nObrigado por comprar na Livraria Para Baicho.\nObriogado por ajudar os Guinomos!, ${nomeCliente}.`);
     
     carrinho = [];
     atualizarCarrinhoHTML();
