@@ -517,6 +517,7 @@ const catalogoLivros = [
         estrelas: 5
     }
 ];
+
 let carrinho = [];
 let livroSelecionadoId = null;
 let usuarioLogado = null; 
@@ -747,7 +748,7 @@ function processarLogin() {
 
 function concluirCompraSucesso() {
     const nomeCliente = usuarioLogado ? usuarioLogado.nome : "Cliente";
-    alert(`🎉 Pedido Concluído com Sucesso!\nObrigado por comprar na Livraria Para Baicho.\nObriogado por ajudar os Guinomos!, ${nomeCliente}.`);
+    alert(`🎉 Pedido Concluído com Sucesso!\nObrigado por comprar na Livraria Para Baicho.\nObrigado por ajudar os Gnomos!, ${nomeCliente}!`);
     
     carrinho = [];
     atualizarCarrinhoHTML();
