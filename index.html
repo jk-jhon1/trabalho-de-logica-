@@ -4,21 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livraria Para Baicho - Livraria Online</title>
+    
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-gray-100 font-sans min-h-screen flex flex-col items-center">
 
     <div class="w-full max-w-md bg-gray-50 min-h-screen shadow-2xl flex flex-col border-x border-gray-200">
-        
+     
         <header class="bg-blue-600 text-white shadow-md sticky top-0 z-50 px-4 py-4 flex flex-col gap-3">
-            <div class="flex justify-between items-center">
-                <h1 class="text-xl font-bold tracking-wide text-center w-full">📚 Livraria Para Baicho</h1>
-            </div>
-            
+            <h1 class="text-xl font-bold tracking-wide text-center w-full">📚 Livraria Para Baicho</h1>
             <div class="w-full flex shadow-sm">
                 <input type="text" id="busca-input" placeholder="Pesquise por título, autor..." 
                        class="w-full p-2 rounded-l text-sm text-gray-800 focus:outline-none bg-white">
-                <button onclick="filtrarLivros()" class="bg-blue-800 hover:bg-blue-900 px-4 rounded-r text-sm font-semibold transition">
+                <button onclick="filtrarLivros()" class="bg-blue-800 hover:bg-blue-900 px-4 rounded-r text-sm font-semibold transition cursor-pointer">
                     Buscar
                 </button>
             </div>
@@ -29,13 +27,15 @@
             <div>
                 <h2 class="text-lg font-bold text-gray-800 mb-4 border-b border-gray-200 pb-1">Catálogo de Livros</h2>
                 <div id="vitrine-livros" class="flex flex-col gap-5">
-                    </div>
+
+                </div>
             </div>
 
             <div class="bg-white p-4 rounded-lg shadow border border-gray-100">
-                <h2 class="text-base font-bold text-gray-800 mb-3 flex items-center gap-2">
-                    🛒 Seu Carrinho
-                </h2>
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-base font-bold text-gray-800 flex items-center gap-2">🛒 Seu Carrinho</h2>
+                    <span class="text-[9px] font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full uppercase tracking-wider">Frete Grátis > R$ 150</span>
+                </div>
                 <div id="itens-carrinho" class="space-y-2 divide-y divide-gray-100 max-h-48 overflow-y-auto mb-3">
                     <p class="text-gray-500 text-xs py-1">O seu carrinho está vazio.</p>
                 </div>
@@ -48,9 +48,7 @@
             </div>
 
             <div class="bg-white p-4 rounded-lg shadow border border-gray-100 mb-6">
-                <h2 class="text-base font-bold text-gray-800 mb-1 flex items-center gap-2">
-                    🚚 Finalizar Entrega
-                </h2>
+                <h2 class="text-base font-bold text-gray-800 mb-1 flex items-center gap-2">🚚 Finalizar Entrega</h2>
                 <p class="text-[10px] text-gray-400 mb-3">
                     Sede: Rua Maria Sobania, 309 - Tindiquera. Taxa: R$ 0,30/KM.
                 </p>
@@ -61,13 +59,11 @@
                         <input type="text" id="input-rua" placeholder="Ex: Av. das Nações" 
                                class="w-full p-2 border border-gray-300 rounded text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
                     </div>
-                    
                     <div>
                         <label class="block text-[10px] font-bold text-gray-500 uppercase mb-0.5">Número:</label>
                         <input type="text" id="input-numero" placeholder="Ex: 1520" 
                                class="w-full p-2 border border-gray-300 rounded text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
                     </div>
-
                     <div>
                         <label class="block text-[10px] font-bold text-gray-500 uppercase mb-0.5">Bairro:</label>
                         <select id="input-bairro" class="w-full p-2 border border-gray-300 rounded text-xs bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
@@ -96,7 +92,7 @@
                     </div>
                     <div class="flex justify-between text-xs text-gray-600">
                         <span>Taxa de Entrega:</span>
-                        <span id="txt-valor-frete" class="font-bold text-green-700">R$ 0,00</span>
+                        <span id="txt-valor-frete" class="font-bold">R$ 0,00</span>
                     </div>
                     <div class="border-t border-blue-200 pt-2 mt-1 flex justify-between items-center">
                         <span class="font-bold text-xs text-gray-800">Total a Pagar:</span>
@@ -147,7 +143,6 @@
     <div id="modal-login" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center hidden p-4">
         <div class="bg-white rounded-lg shadow-2xl max-w-xs w-full flex flex-col relative p-6 space-y-4">
             <button onclick="fecharModalLogin()" class="absolute top-2 right-3 text-gray-400 hover:text-gray-600 text-2xl font-bold cursor-pointer z-10">&times;</button>
-            
             <div class="text-center mb-1">
                 <h2 class="text-xl font-black text-gray-800">Acesse sua Conta</h2>
                 <p class="text-[11px] text-gray-500 mt-1">Identifique-se para finalizar seu pedido.</p>
@@ -178,10 +173,6 @@
                     Entrar e Finalizar
                 </button>
             </form>
-
-            <div class="text-center mt-1 border-t border-gray-100 pt-3">
-                <a href="#" class="text-[11px] text-blue-600 hover:underline font-semibold">Ainda não tem conta? Cadastre-se</a>
-            </div>
         </div>
     </div>
 
