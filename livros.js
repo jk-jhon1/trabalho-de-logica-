@@ -17,7 +17,7 @@ const catalogoLivros = [
         autor: "George Orwell", 
         genero: "Distopia", 
         preco: 34.90, 
-        capa: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEHkZS6OOzvnxmYi37qpQ1Z80SfXW6DeOSIg&s", 
+        capa: "https://watabou.github.io/one-page-dungeon/?seed=2098938403", 
         sinopse: "Publicado em 1949, o texto de Orwell nasceu destinado à polêmica. Traduzido em mais de sessenta países, virou minissérie, filmes, quadrinhos, mangás e até uma ópera.",
         ano: 1949,
         paginas: 336,
