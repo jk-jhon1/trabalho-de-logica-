@@ -588,7 +588,7 @@ function renderizarVitrine(lista) {
                     <div class="h-44 bg-gray-200 rounded mb-3 flex items-center justify-center overflow-hidden">
                         <img src="${livro.capa}" class="w-full h-full object-cover">
                     </div>
-                    <span class="text-[10px] font-bold text-blue-600 uppercase">${livro.genero}</span>
+                    <span class="text-[10px] font-bold text-red-600 uppercase">${livro.genero}</span>
                     <h3 class="text-base font-bold text-gray-800 mt-0.5 line-clamp-1">${livro.titulo}</h3>
                     <p class="text-xs text-gray-500 mb-1">${livro.autor}</p>
                     ${gerarEstrelasHtml(livro.estrelas || 5)}
@@ -597,7 +597,7 @@ function renderizarVitrine(lista) {
                     <span class="text-lg font-black text-gray-900">R$ ${livro.preco.toFixed(2)}</span>
                     <div class="flex gap-1">
                         <button onclick="mostrarDetalhes(${livro.id})" class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-2 rounded text-[11px] cursor-pointer border border-gray-200">Detalhes</button>
-                        <button onclick="adicionarAoCarrinho(${livro.id})" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-[11px] cursor-pointer">+ Add</button>
+                        <button onclick="adicionarAoCarrinho(${livro.id})" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-[11px] cursor-pointer">+ Add</button>
                     </div>
                 </div>
             </div>`;
