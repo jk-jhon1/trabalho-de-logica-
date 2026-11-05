@@ -524,7 +524,43 @@ let usuarioLogado = null;
 
 document.addEventListener("DOMContentLoaded", () => {
     renderizarVitrine(catalogoLivros);
+
+    // Fecha o painel lateral com ESC
+    document.addEventListener("keydown", (evento) => {
+        if (evento.key === "Escape" && painelPedidoAberto()) fecharPainelPedido();
+    });
 });
+
+/* ---------- Painel lateral do pedido ---------- */
+
+function painelPedidoAberto() {
+    const painel = document.getElementById("painel-pedido");
+    return !!painel && painel.classList.contains("aberto");
+}
+
+function abrirPainelPedido() {
+    const painel = document.getElementById("painel-pedido");
+    const overlay = document.getElementById("overlay-pedido");
+    if (!painel || !overlay || painel.classList.contains("aberto")) return;
+
+    painel.classList.add("aberto");
+    overlay.classList.add("aberto");
+    document.body.classList.add("painel-travado");
+
+    // foco no botao de fechar, por acessibilidade
+    const fechar = painel.querySelector("[data-fechar-painel]");
+    if (fechar) fechar.focus();
+}
+
+function fecharPainelPedido() {
+    const painel = document.getElementById("painel-pedido");
+    const overlay = document.getElementById("overlay-pedido");
+    if (!painel || !overlay) return;
+
+    painel.classList.remove("aberto");
+    overlay.classList.remove("aberto");
+    document.body.classList.remove("painel-travado");
+}
 
 function mostrarDetalhes(id) {
     livroSelecionadoId = id;
@@ -759,4 +795,7 @@ function concluirCompraSucesso() {
     
     document.getElementById('resumo-frete').classList.add('hidden');
     document.getElementById('resumo-frete').classList.remove('flex');
+
+    // fecha o painel lateral depois de finalizar o pedido
+    fecharPainelPedido();
 }
